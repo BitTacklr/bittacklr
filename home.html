@@ -1,0 +1,159 @@
+<html>
+<head>
+    <title>BitTacklr</title>
+    <meta name=viewport content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="author" content="info@bittacklr.be" />
+    <link rel="shortcut icon" href="images/favicon.ico" />
+    <style>
+@font-face {
+  font-family: 'BitTacklr';
+  src: url('fonts/bittacklr.eot'); /* IE9 Compat Modes */
+  src: url('fonts/bittacklr.woff2') format('woff2'), /* Super Modern Browsers */
+       url('fonts/bittacklr.woff') format('woff'), /* Pretty Modern Browsers */
+       url('fonts/bittacklr.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('fonts/bittacklr.svg#bittacklr') format('svg'); /* Legacy iOS */
+}
+@media (min-width: 720px) 
+{
+    #mobilecontent 
+    {
+        display: none;
+    }
+    body 
+    {
+        background-image: url(images/home0.svg);
+        background-repeat: no-repeat;
+        background-size:cover;
+    }
+}
+@media (max-width: 720px) 
+{
+    body 
+    {
+        background-image: url(images/mobilehome.svg);
+        background-repeat: no-repeat;
+        background-size:cover;
+    }
+    #mobilecontent 
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        height: 100%;
+    }
+    #biticon 
+    {
+        display: none;
+    }
+}
+/* Mobile */
+#mobilemenu a
+{
+    color: #666666;
+    font-family: monospace;
+    font-size: xx-large;
+    text-decoration: none;
+}
+#mobilemenu a:hover
+{
+    color: #aaaaaa;
+}
+#mobilelogo
+{
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#mobilelogo img
+{
+    width: 100%;
+    height: auto;
+}
+#mobileslogan
+{
+    font-family: monospace;
+    font-size: xx-large;
+    color: whitesmoke;
+    margin-bottom: 20px;
+}
+#mobilemenu
+{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 100%;
+}
+#mobilemenu ul
+{
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+#mobilemenu li
+{
+    list-style: none;
+    text-align: center;
+    background-color: #000000;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #cc0000;
+    box-sizing: border-box;
+}
+#mobilemenu a:hover
+{
+    color: #999999;
+}
+
+body 
+{
+    margin: 0px;
+    padding: 0px;
+    min-width: 320px;
+}
+
+#herotext 
+{
+    font-family: monospace;
+    font-size: xx-large;
+    color: whitesmoke;
+}
+#biticon 
+{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 0px;
+    padding: 0px;
+    height: 45px;
+    width: 45px;
+}
+    </style>
+</head>
+<body>
+    <div id="mobilecontent">
+        <div id="mobilelogo">
+            <img src="images/bittacklr-logo.svg" alt="The BitTacklr logo" title="The BitTacklr logo"></img>
+        </div>
+        <div id="mobileslogan">
+            <span>a software company</span>
+        </div>
+        <div id="mobilemenu">
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Services.html">Services</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+                <li><a href="Blog.html">Blog</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="herohome">
+        <div id="herotext">
+            <span>a software company</span>
+        </div>
+    </div>
+    
+    <div id="biticon"><img src="images/bittacklr-icon.svg" alt="The BitTacklr icon" title="The BitTacklr icon"></div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="45"
+   height="45"
+   viewBox="0 0 45 45"
+   id="svg4273"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="iconic.svg">
+  <defs
+     id="defs4275" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="15.839192"
+     inkscape:cx="41.693988"
+     inkscape:cy="-13.924448"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="3775"
+     inkscape:window-height="2136"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     units="px" />
+  <metadata
+     id="metadata4278">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-1007.3622)">
+    <g
+       id="g4225"
+       transform="translate(0.06313454,0)">
+      <rect
+         ry="2.6516504"
+         y="1007.4061"
+         x="-0.038820855"
+         height="45"
+         width="45"
+         id="rect4488"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.11972702px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <rect
+         y="1020.0753"
+         x="14.958278"
+         height="19.422035"
+         width="3"
+         id="rect5036-6"
+         style="fill:#ff0000;fill-opacity:1;stroke:none" />
+      <g
+         transform="translate(-222.68941,568.41452)"
+         id="text4212"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.24400139px;line-height:125%;font-family:'Cafe Nero M54';-inkscape-font-specification:'Cafe Nero M54';letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1">
+        <path
+           inkscape:connector-curvature="0"
+           id="path4217"
+           d="m 234.3215,451.40142 0,19.8624 -4.67727,0 0,-15.95399 -3.49835,0 0,-3.90841 8.17562,0 z" />
+        <path
+           sodipodi:nodetypes="scsssssssscssccccc"
+           inkscape:connector-curvature="0"
+           id="path4219"
+           d="m 261.59504,451.40142 c 0.64072,0 1.19601,0.23493 1.66588,0.7048 0.46986,0.46132 0.70479,1.01234 0.70479,1.65306 l 0,15.14668 c 0,0.64927 -0.23493,1.20456 -0.70479,1.66588 -0.46987,0.46132 -2.3066,0.69198 -1.66588,0.69198 2.25922,0 -3.27295,0 -15.77459,0 -0.64927,0 -1.20456,-0.23066 -1.66588,-0.69198 -0.46132,-0.46132 -0.69198,-1.01661 -0.69198,-1.66588 l 0,-15.14668 c 0,-0.64072 0.23066,-1.19174 0.69198,-1.65306 0.46132,-0.46987 1.01661,-0.7048 1.66588,-0.7048 z m -2.3066,3.90841 -11.16139,0 0,12.04559 11.16139,0 z" />
+      </g>
+    </g>
+  </g>
+</svg>
