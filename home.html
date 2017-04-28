@@ -24,7 +24,7 @@
     {
         background-image: url(images/home0.svg);
         background-repeat: no-repeat;
-        background-size:cover;
+        background-size: auto;
     }
 }
 @media (max-width: 720px) 
@@ -33,7 +33,7 @@
     {
         background-image: url(images/mobilehome.svg);
         background-repeat: no-repeat;
-        background-size:cover;
+        background-size: cover;
     }
     #mobilecontent 
     {
@@ -48,6 +48,13 @@
         display: none;
     }
 }
+@media (max-height: 380px) 
+{
+    #mobilebiticon 
+    {
+        display: none;
+    }
+}
 /* Mobile */
 #mobilemenu a
 {
@@ -55,10 +62,12 @@
     font-family: monospace;
     font-size: xx-large;
     text-decoration: none;
+    display: block;
+    width: 100%;
 }
 #mobilemenu a:hover
 {
-    color: #aaaaaa;
+    color: #999999;
 }
 #mobilelogo
 {
@@ -96,27 +105,23 @@
     text-align: center;
     background-color: #000000;
     padding: 10px;
-    margin-bottom: 10px;
     border-bottom: 1px solid #cc0000;
     box-sizing: border-box;
 }
-#mobilemenu a:hover
+#mobilebiticon 
 {
-    color: #999999;
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 10px;
+    padding: 0px;
+    height: 45px;
+    width: 45px;
 }
-
 body 
 {
     margin: 0px;
     padding: 0px;
     min-width: 320px;
-}
-
-#herotext 
-{
-    font-family: monospace;
-    font-size: xx-large;
-    color: whitesmoke;
 }
 #biticon 
 {
@@ -140,20 +145,13 @@ body
         </div>
         <div id="mobilemenu">
             <ul>
-                <li><a href="Home.html">Home</a></li>
-                <li><a href="Services.html">Services</a></li>
-                <li><a href="Contact.html">Contact</a></li>
-                <li><a href="Blog.html">Blog</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="blog.html">Blog</a></li>
             </ul>
         </div>
-    </div>
-
-    <div id="herohome">
-        <div id="herotext">
-            <span>a software company</span>
-        </div>
-    </div>
-    
+        <div id="mobilebiticon"><img src="images/bittacklr-icon.svg" alt="The BitTacklr icon" title="The BitTacklr icon"></div>
+    </div>    
     <div id="biticon"><img src="images/bittacklr-icon.svg" alt="The BitTacklr icon" title="The BitTacklr icon"></div>
 </body>
 </html>
