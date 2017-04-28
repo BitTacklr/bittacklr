@@ -144,17 +144,14 @@ body
 #largemenuhamburger
 {
     display: block;
+    width: 72px;
+    height: 54px;
     cursor: pointer;
     position: relative;
-    right: 72px;
     -webkit-transform: rotate(0deg);
     -moz-transform: rotate(0deg);
     -o-transform: rotate(0deg);
     transform: rotate(0deg);
-    -webkit-transition: .5s ease-in-out;
-    -moz-transition: .5s ease-in-out;
-    -o-transition: .5s ease-in-out;
-    transition: .5s ease-in-out;
 }
 #largemenuhamburger li
 {
@@ -176,25 +173,25 @@ body
     transition: .25s ease-in-out;
 }
 
-#largemenu.open li
+#largemenuhamburger.open li
 {
     background: #cc0000;
 }
 
-#largemenu li:nth-child(1)
+#largemenuhamburger li:nth-child(1)
 {
     top: 0px;
 }
-#largemenu li:nth-child(2)
+#largemenuhamburger li:nth-child(2)
 {
     top: 18px;
 }
-#largemenu li:nth-child(3)
+#largemenuhamburger li:nth-child(3)
 {
     top: 36px;
 }
 
-#largemenu.open li:nth-child(1)
+#largemenuhamburger.open li:nth-child(1)
 {
     top: 18px;
     -webkit-transform: rotate(135deg);
@@ -202,12 +199,12 @@ body
     -o-transform: rotate(135deg);
     transform: rotate(135deg);
 }
-#largemenu.open li:nth-child(2)
+#largemenuhamburger.open li:nth-child(2)
 {
     width: 0%;
     opacity: 0;
 }
-#largemenu.open li:nth-child(3)
+#largemenuhamburger.open li:nth-child(3)
 {
     top: 18px;
     -webkit-transform: rotate(-135deg);
@@ -250,7 +247,7 @@ body
 function toggleMenu(element)
 {
     if ( element == undefined) return;
-    if ( element.className === "open" )
+    if ( element.className !== "" )
     {
         element.className = "";
     }
@@ -279,8 +276,15 @@ function toggleMenu(element)
         <div id="smallbiticon"><img src="images/bittacklr-icon.svg" alt="The BitTacklr icon" title="The BitTacklr icon"></div>
     </div>
     <div id="largecontent">
-        <nav id="largemenu" onclick="toggleMenu(this);">
-            <ul id="largemenuhamburger"><li></li><li></li><li></li></ul>
+        <nav id="largemenu">
+            <ul id="largemenuhamburger" onclick="toggleMenu(this);"><li></li><li></li><li></li></ul>
+            <nav id="largemenu" style="display: none;">
+                <ul>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </nav>
         </nav>
         <div id="largelogo">
             <div>
