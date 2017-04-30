@@ -1,0 +1,14 @@
+contentDir = "content"
+layoutDir = "layouts"
+publishDir = "public"
+buildDrafts = false
+baseURL = "http://yoursite.example.com/"
+canonifyURLs = true
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[params]
+  description = "Tesla's Awesome Hugo Site"
+  author = "Nikola Tesla"
