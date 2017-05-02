@@ -1,8 +1,0 @@
-@font-face {
-  font-family: 'BitTacklr';
-  src: url('fonts/bittacklr.eot'); /* IE9 Compat Modes */
-  src: url('fonts/bittacklr.woff2') format('woff2'), /* Super Modern Browsers */
-       url('fonts/bittacklr.woff') format('woff'), /* Pretty Modern Browsers */
-       url('fonts/bittacklr.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('fonts/bittacklr.svg#bittacklr') format('svg'); /* Legacy iOS */
-}
