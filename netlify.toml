@@ -2,12 +2,12 @@
 [build]
   base    = "."
   publish = "site"
-  command = "build.sh"
+  command = "./netlify.sh"
 
 [context.production]
-  command = "build.sh production"
+  command = "./netlify.sh production"
 
 # Deploy Preview context: All Deploy Previews
 # will inherit these settings.
 [context.deploy-preview]
-  command = "build.sh preview"
+  command = "./netlify.sh preview"
