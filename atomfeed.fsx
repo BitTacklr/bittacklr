@@ -28,22 +28,25 @@ type FeedEntry =
         Content: string
     }
 type Feed = 
-    { 
+    {
+        SiteUrl: string
+        BaseUrl: string 
         Date: string
-        Posts: FeedEntry []
+        Entries: FeedEntry []
     }
 
-let private generateFeedEntries entries =
-    entries
+let private ns = "http://www.w3.org/2005/Atom"
+let private generateFeedEntries feed =
+    feed.Entries
     |> Array.map (fun entry -> 
-        XElementNS "entry" "http://www.w3.org/2005/Atom" [
-            XElementNS "title" "http://www.w3.org/2005/Atom" [ string entry.Title ]
-            XElementNS "link" "http://www.w3.org/2005/Atom" [
-                XAttribute "href" "http://bittacklr.be/feed.atom"
+        XElementNS "entry" ns [
+            XElementNS "title" ns [ string entry.Title ]
+            XElementNS "link" ns [
+                XAttribute "href" (sprintf "%s/%s" feed.BaseUrl entry.RelativeUrl)
             ]
-            XElementNS "updated" "http://www.w3.org/2005/Atom" [ string entry.Date ]
-            XElementNS "id" "http://www.w3.org/2005/Atom" [ string (sprintf "urn:bittacklr:%s" entry.Id) ]
-            XElementNS "content" "http://www.w3.org/2005/Atom" [
+            XElementNS "updated" ns [ string entry.Date ]
+            XElementNS "id" ns [ string (sprintf "urn:bittacklr:%s" entry.Id) ]
+            XElementNS "content" ns [
                 XAttribute "type" "html"
                 box entry.Content
             ]
@@ -53,29 +56,29 @@ let private generateFeedEntries entries =
 /// Functions
 let private generateFeed feed =
     XDocument (XDeclaration "1.0" "UTF-8" "yes") [
-        XElementNSSeq "feed" "http://www.w3.org/2005/Atom" 
+        XElementNSSeq "feed" ns 
             [
                 [|
-                    XElementNS "title" "http://www.w3.org/2005/Atom" [ string "The BitTacklr Blog"]
-                    XElementNS "link" "http://www.w3.org/2005/Atom" [
-                        XAttribute "href" "http://bittacklr.be/feed.atom"
+                    XElementNS "title" ns [ string "The BitTacklr Blog"]
+                    XElementNS "link" ns [
+                        XAttribute "href" (sprintf "%s/bittacklr.atom" feed.SiteUrl)
                         XAttribute "rel" "self"
                     ]
-                    XElementNS "link" "http://www.w3.org/2005/Atom" [
-                        XAttribute "href" "http://bittacklr.be/"
+                    XElementNS "link" ns [
+                        XAttribute "href" feed.SiteUrl
                     ]
-                    XElementNS "updated" "http://www.w3.org/2005/Atom" [ string feed.Date ]
-                    XElementNS "id" "http://www.w3.org/2005/Atom" [ string "http://bittacklr.be/" ]
-                    XElementNS "author" "http://www.w3.org/2005/Atom" [
-                        XElementNS "name" "http://www.w3.org/2005/Atom" [ string "Yves Reynhout" ]
-                        XElementNS "email" "http://www.w3.org/2005/Atom" [ string "yves.reynhout@bittacklr.be" ]
+                    XElementNS "updated" ns [ string feed.Date ]
+                    XElementNS "id" ns [ string feed.BaseUrl ]
+                    XElementNS "author" ns [
+                        XElementNS "name" ns [ string "Yves Reynhout" ]
+                        XElementNS "email" ns [ string "yves.reynhout@bittacklr.be" ]
                     ]
                 |]
-                generateFeedEntries feed.Posts  
+                generateFeedEntries feed
             ]
         ]
 
 let generate (feed: Feed) (siteDir: DirectoryInfo) =
     let document = generateFeed feed
-    let feedFile = FileInfo(Path.Combine(siteDir.FullName, "bittacklr-atom.xml"))
+    let feedFile = FileInfo(Path.Combine(siteDir.FullName, "bittacklr.atom"))
     document.Save feedFile.FullName

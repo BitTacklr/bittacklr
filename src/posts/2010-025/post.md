@@ -1,0 +1,28 @@
+---
+original: https://seabites.wordpress.com/2010/11/01/a-message-for-mr-aggregate/
+title: "Mr. Aggregate? You have a message."
+slug: "a-message-for-mr-aggregate"
+date: 2010-11-01
+author: Yves Reynhout
+tags: [ddd]
+publish: true
+---
+When creating new aggregates, one usually has an aggregate that plays a "factory" like role. It's the ideal spot to copy any data the created aggregate might require later on in its life cycle. 
+
+```csharp
+ public class VideoTitle : Aggregate { private Guid \_id; public VideoTape NewTape(Guid id, string barcode) { return new VideoTape(new NewVideoTapeAdded(id, barcode, new VideoTitleId(\_id)); } } public class VideoTape : Aggregate { private Guid \_videoTitleId; private string \_barcode; internal VideoTape(IEvent @event) { ApplyEvent(@event); } private void AppliesEvent(NewVideoTapeAdded @event) { \_barcode = @event.Barcode; \_videoTitleId = @event.VideoTitle.Id; } } 
+```
+
+ In this example, the video title identifier is copied over to the video tape's state, to give the video renting model an idea of what video tapes are available for a given video title. This is useful for various functionality, such as a customer asking "Hi, do you have a copy of 'Blade Runner' I can rent?" or the boss telling an employee "John, we're no longer renting 'Scary Movie 4'. Could you grab tape 365, 456 and 677, and put them in the box here?". But what if the aggregate's copied state is affected by some change/event in the aggregate it copied that state from? In the example below, a service is a treatment that is performed in a beauty parlor. Facial Care, Touch-up, Colour Correction, Full foil are examples of services. Now, not every employee can perform each service. Only after training/certification will a service be activated for an employee. But even then, there's a difference between an employee performing a service for the first couple of months and an employee who has been performing the service for years. This is important when you're planning appointments. That's why on an activated service, one can override the duration a service takes. 
+
+```csharp
+ public class Service : Aggregate { private Guid \_id; private string \_name; private TimeSpan \_duration; public void ChangeDuration(TimeSpan duration) { ApplyEvent(new ChangedServiceDuration(\_id, duration, \_duration)); } public ActivatedService ActivateFor(Guid id, Employee employee) { return new ActivatedService(new ActivatedServiceForEmployee(id, \_id, \_name, \_duration, employee.ToEventId())); } private void AppliesEvent(ChangedServiceDuration @event) { \_duration = @event.NewDuration; } } public class ActivatedService : Aggregate { private Guid \_id; private Guid \_serviceId; private string \_serviceName; private Guid \_employeeId; private TimeSpan \_duration; private bool \_overridden; internal ActivatedService(IEvent @event) { ApplyEvent(@event); } public void OverrideDuration(TimeSpan duration) { ApplyEvent(new OverriddenActivatedServiceDuration(\_id, duration, \_duration)); } public void ChangeDuration(TimeSpan duration) { Guard.Against(\_overridden, ChangeActivatedServiceDurationErrorCode.CanNotChangeDurationWhenItsAlreadyOverridden); ApplyEvent(new ChangedActivatedServiceDuration(\_id, duration, \_duration)); } private void AppliesEvent(ChangedActivatedServiceDuration @event) { \_duration = @event.NewDuration; } private void AppliesEvent(OverriddenActivatedServiceDuration @event) { \_overridden = true; \_duration = @event.NewDuration; } private void AppliesEvent(ActivatedServiceForEmployee @event) { \_id = @event.Id; \_serviceId = @event.ServiceId; \_serviceName = @event.ServiceName; \_duration = @event.ServiceDuration; \_overridden = false; \_employeeId = @event.EmployeeId; } } 
+```
+
+ The use case I want to bring to your attention is when the duration of a service is changed. In such a case the duration of each activated service that did not override its duration should automatically assume the duration of the service. Some might solve this problem by simply updating the duration of each activated service - without overridden duration - in the read model, but since other behavior might be executed using an activated service it needs its duration updated. So how do we go about that? Simple - you send each ActivatedService aggregate without overridden duration a message (more precisely, a command) stating what its new duration should be. That's what the ChangeDuration method of the ActivatedService aggregate is for. This is not a new idea, it has been discussed in depth in Pat Helland's "[Life beyond Distributed Transactions: an Apostate's Opinion](http://web.mit.edu/tibbetts/Public/CIDR_2007_Proceedings/papers/cidr07p15.pdf)". This technique does not only apply to copied data, but also to cascading state transitions. In the example below, when a ward is closed, each of its rooms should also be closed. Again, this is accomplished by sending a message to each Room of the closed Ward, requesting to close it. Mind you this could also work the other way around: Only when all rooms of a ward are closed down, can the ward itself be closed. In that case messages are issued to do a form of ref-counting on the ward, one for each Open/Close command on a Room of the Ward. 
+
+```csharp
+ public class Ward : Aggregate { public void Close() { ... } } public class Room : Aggregate { public void Close() { ... } } 
+```
+
+ I'd like to conclude with the general observation that anything that applies "[object inheritance](http://www.informit.com/articles/article.aspx?p=25159)" can benefit from this technique, especially if the one inheriting is a separate aggregate.

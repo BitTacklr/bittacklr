@@ -8,10 +8,18 @@ open System
 open System.Diagnostics
 open System.IO
 
+//dev
+// let siteUrl = "http://127.0.0.1:8000/site"
+// //dev online
+// let siteUrl = "http://bittacklr.bitballoon.com"
+//production
+let siteUrl = "http://bittacklr.be"
+
 let siteDir = DirectoryInfo(Path.Combine(__SOURCE_DIRECTORY__, "site"))
+let siteBlogDir = DirectoryInfo(Path.Combine(siteDir.FullName, "blog"))
 let srcDir = DirectoryInfo(Path.Combine(__SOURCE_DIRECTORY__, "src"))
 let templatesDir = DirectoryInfo(Path.Combine(srcDir.FullName, "templates"))
-let postsDir = DirectoryInfo(Path.Combine(srcDir.FullName, "posts"))
+let blogPostsDir = DirectoryInfo(Path.Combine(srcDir.FullName, "posts"))
 
 Target "Clean" (fun () -> DeleteDir siteDir.FullName)
 
@@ -35,7 +43,17 @@ Target "Init" (fun () ->
 )
 
 Target "Build" (fun () -> 
-    Blog.generate postsDir templatesDir siteDir
+    let settings : Blog.BlogSettings =
+        {
+            SiteUrl = siteUrl
+            SiteDir = siteDir
+            SiteBlogDir = siteBlogDir
+            BlogBaseUrl = sprintf "%s/blog" siteUrl
+            SrcDir = srcDir
+            BlogPostsDir = blogPostsDir
+            TemplatesDir = templatesDir
+        }
+    Blog.generate settings
 )
 
 "Clean"

@@ -1,0 +1,13 @@
+# Global settings applied to the whole site.
+[build]
+  base    = "."
+  publish = "site"
+  command = "build.sh"
+
+[context.production]
+  command = "build.sh production"
+
+# Deploy Preview context: All Deploy Previews
+# will inherit these settings.
+[context.deploy-preview]
+  command = "build.sh preview"

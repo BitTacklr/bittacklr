@@ -9,7 +9,7 @@ body
 @media (min-width: 720px) 
 {
     html { 
-        background: url(../images/largehome.svg) no-repeat center center fixed; 
+        background: url(images/largehome.svg) no-repeat center center fixed; 
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -ms-background-size: cover;
@@ -28,7 +28,7 @@ body
 @media (max-width: 720px) 
 {
     html { 
-        background: url(../images/smallhome.svg) no-repeat center center fixed;
+        background-color: url(images/smallhome.svg) no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -ms-background-size: cover;
@@ -51,6 +51,54 @@ body
     align-items: center;
     justify-content: flex-start;
     height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.smallyearcontent {
+    font-family: monospace;
+    font-size: xx-large;
+    color: whitesmoke;
+    width: 100%;
+}
+.smallyearcontent ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+.smallyearcontent li {
+    list-style: none;
+    text-align: center;
+    background-color: #000000;
+    padding: 10px;
+    border-bottom: 1px solid #cc0000;
+    box-sizing: border-box;
+}
+.smallyearcontent a {
+    color: #666666;
+    font-family: monospace;
+    font-size: x-large;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+}
+.smallyearcontent a:hover {
+    color: #999999;
+}
+.smallyear {
+    margin: 0px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #555555;
+}
+#smallbiticon 
+{
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 0px;
+    height: 40px;
+    width: 40px;
 }
 /* large */
 #largecontent 
