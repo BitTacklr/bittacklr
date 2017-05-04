@@ -36,7 +36,6 @@ Target "CopyStaticContent" (fun () ->
     |> Seq.iter (fun path -> 
         CopyFileWithSubfolder srcDir.FullName siteDir.FullName path
     )
-    CopyFile (Path.Combine(siteDir.FullName, "index.html")) "src/home.html"
 )
 
 Target "Init" (fun () -> 
