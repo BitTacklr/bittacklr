@@ -27,6 +27,7 @@ Target "CopyStaticContent" (fun () ->
     !! "src/*.html"
     ++ "src/*.css"
     ++ "src/*.js"
+    ++ "src/*.vcf"
     ++ "src/images/*.svg"
     ++ "src/fonts/*.eot"
     ++ "src/fonts/*.svg"
