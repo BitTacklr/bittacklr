@@ -126,6 +126,20 @@ body
     justify-content: flex-start;
     margin-bottom: 10px;
 }
+#smallemail
+{
+    margin-bottom: 3px;
+}
+#smallemail span
+{
+    font-size: small;
+}
+#smallemail a
+{
+    font-size: small;
+    display: inline;
+    text-decoration-line: underline;
+}
 #smalltel
 {
     margin-bottom: 3px;
