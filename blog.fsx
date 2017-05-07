@@ -170,12 +170,11 @@ let private readBlogPostMetadata (file: FileInfo) =
 let private renderBlogPost (template: FileInfo) (input: FileInfo) (output: FileInfo) =
     trace (sprintf "Rendering blogpost %s" input.FullName)
     //let info = ProcessStartInfo("pandoc", sprintf "--read=markdown_github+yaml_metadata_block --write=html5 --template='%s' --output='%s' '%s'" template.FullName output.FullName input.FullName)
-    let info = ProcessStartInfo("C:\\Users\\yvesr\\AppData\\Local\\Pandoc\\pandoc.exe", sprintf "--read=markdown_github+yaml_metadata_block --write=html5 --standalone --output='%s' '%s'" output.FullName input.FullName)
+    let info = ProcessStartInfo("C:\\Users\\yvesr\\AppData\\Local\\Pandoc\\pandoc.exe", sprintf "--read=markdown_github+yaml_metadata_block --write=html5 --standalone --output=\"%s\" \"%s\"" output.FullName input.FullName)
     info.WindowStyle <- ProcessWindowStyle.Hidden
     use pandoc = Process.Start(info)
-    trace info.Arguments
-    trace info.FileName
-    if not(pandoc.WaitForExit(timeToRenderBlogPost)) then failwith (sprintf "Rendering %s using pandoc took longer than %dms." input.FullName timeToRenderBlogPost)
+    if not(pandoc.WaitForExit(timeToRenderBlogPost)) then 
+        failwith (sprintf "Rendering %s using pandoc took longer than %dms." input.FullName timeToRenderBlogPost)
     if pandoc.ExitCode <> 0 then failwith (sprintf "Rendering %s using pandoc failed with exit code %d." input.FullName pandoc.ExitCode)
 
 let private generateBlogPosts (blogPosts: BlogPost []) (blogPostTemplate: FileInfo) (siteDir: DirectoryInfo) =
