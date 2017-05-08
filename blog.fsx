@@ -170,7 +170,8 @@ let private readBlogPostMetadata (file: FileInfo) =
 let private renderBlogPost (template: FileInfo) (input: FileInfo) (output: FileInfo) =
     trace (sprintf "Rendering blogpost %s" input.FullName)
     //let info = ProcessStartInfo("pandoc", sprintf "--read=markdown_github+yaml_metadata_block --write=html5 --template='%s' --output='%s' '%s'" template.FullName output.FullName input.FullName)
-    let info = ProcessStartInfo("C:\\Users\\yvesr\\AppData\\Local\\Pandoc\\pandoc.exe", sprintf "--read=markdown_github+yaml_metadata_block --write=html5 --standalone --output=\"%s\" \"%s\"" output.FullName input.FullName)
+    let pandocCmd = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Pandoc"), "pandoc.exe")
+    let info = ProcessStartInfo(pandocCmd, sprintf "--read=markdown_github+yaml_metadata_block --write=html5 --standalone --output=\"%s\" \"%s\"" output.FullName input.FullName)
     info.WindowStyle <- ProcessWindowStyle.Hidden
     use pandoc = Process.Start(info)
     if not(pandoc.WaitForExit(timeToRenderBlogPost)) then 
