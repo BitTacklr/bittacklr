@@ -9,9 +9,10 @@
     <meta name="description" content="The BitTacklr website" />
     <link rel="shortcut icon" href="images/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="contact.css" />
+    <script type="text/javascript" src="menu.js"></script>
     <!-- Google Maps -->
     <script type="text/javascript" src="map.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCN3dUT0-PGUMika74xtEXT_n6EQGdqCp0&callback=initSmallMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCN3dUT0-PGUMika74xtEXT_n6EQGdqCp0&callback=initMaps"></script>
     <!-- End Google Maps -->
     <!-- Google Analytics -->
     <script type="text/javascript">
@@ -58,6 +59,46 @@ ga('send', {
         <div id="smallbiticon"><img src="images/bittacklr-icon.svg" alt="The BitTacklr icon" title="The BitTacklr icon"></div>
     </div>
     <div id="largecontent">
+        <div id="largeinfocard">
+            <ul>
+                <li>
+                    <div id="largeinfovcard">
+                        <div id="largeinfo">
+                            <h1>BitTacklr BVBA</h1>
+                            <address>Ploegstraat 32<br>8450 Bredene<br>Belgium (Europe)</address>
+                            <div id="largeemail"><span>MAIL:&nbsp;</span><a id="largeemaillink" href="about:blank" title="Send us an email"></a></div>
+                            <div id="largetel"><span>TEL:&nbsp;&nbsp;</span><a href="tel:+32472465643" title="Give us a call">+32 (0)472 46 56 43</a></div>
+                            <div id="largevat"><span>VAT:&nbsp;&nbsp;</span><a href="http://kbopub.economie.fgov.be/kbopub/zoeknummerform.html?nummer=0506704838&actionLu=Search&lang=en" target="_blank" title="Verify us on the Crossroads Bank for Enterprises">BE 0506.704.838</a></div>
+                        </div>
+                        <div id="largevcard">
+                            <a href="bittacklr.vcf" title="Download the BitTacklr BVBA vCard" download="bittacklr.vcf"><img src="images/vcard.svg" alt="BitTacklr BVBA" title="Download the BitTacklr BVBA vCard"></a>
+                        </div>
+                    </div>
+                    <div id="largemap"></div>
+                </li>
+                <li>
+                    <h1>Our global channels</h1>
+                    <div id="largechannels">
+                        <a href="skype:bittacklr?call" target="_blank" title="Call us on Skype"><img src="images/skype-icon-inactive.svg" alt="Call us on Skype" title="Call us on Skype"></a>
+                        <a href="http://twitter.com/bittacklr" target="_blank" title="Follow us on Twitter"><img src="images/twitter-icon-inactive.svg" alt="Follow us on Twitter" title="Follow us on Twitter"></a>
+                        <a href="http://www.linkedin.com/company-beta/4989872/" target="_blank" title="Find us on LinkedIn"><img src="images/in-icon-inactive.svg" alt="Find us on LinkedIn" title="Find us on LinkedIn"></a>
+                        <a href="https://plus.google.com/+BitTacklrBredene" target="_blank" title="Find us on Google+"><img src="images/googleplus-icon-inactive.svg" alt="Find us on Google+" title="Find us on Google+"></a>
+                        <a href="https://www.youtube.com/channel/UCnxOS2eUYr44n7FarGKtxfA" target="_blank" title="Find us on YouTube"><img src="images/youtube-icon-inactive.svg" alt="Find us on YouTube" title="Find us on YouTube"></a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="largebiticon"><img src="images/bittacklr-icon.svg" alt="The BitTacklr icon" title="The BitTacklr icon"></div>
+        <div id="largemenu">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+        </div>
+        <div id="largemenubutton">
+            <ul id="largemenuhamburger" onclick="toggleMenu();"><li></li><li></li><li></li></ul>
+        </div>
     </div>
     <script type="text/javascript" src="contact.js"></script>
 </body>

@@ -3,6 +3,7 @@ NUGET
   remote: https://www.nuget.org/api/v2
     AngleSharp (0.9.9)
       Microsoft.Bcl.Async (>= 1.0.168)
+    dotless (1.5.2)
     FAKE (4.60)
     FSharp.Core (4.1.17)
       System.ValueTuple (>= 4.3)

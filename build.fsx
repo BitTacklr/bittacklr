@@ -21,11 +21,25 @@ let srcDir = DirectoryInfo(Path.Combine(__SOURCE_DIRECTORY__, "src"))
 let templatesDir = DirectoryInfo(Path.Combine(srcDir.FullName, "templates"))
 let blogPostsDir = DirectoryInfo(Path.Combine(srcDir.FullName, "posts"))
 
+/// Settings
+let private timeToCompileLess = TimeSpan.FromSeconds(5.0)
+let private dotless = Path.Combine(Path.Combine(Path.Combine(Path.Combine(__SOURCE_DIRECTORY__, "packages"), "dotless"), "tool"), "dotless.compiler.exe")
+
 Target "Clean" (fun () -> DeleteDir siteDir.FullName)
+
+let private compileLess (workingDir: DirectoryInfo) (stylesheet: string) =
+    let result = 
+        ExecProcess (fun info ->
+                        info.FileName <- dotless
+                        info.Arguments <- stylesheet
+                        info.WorkingDirectory <- workingDir.FullName
+                    ) timeToCompileLess
+    if result <> 0 then
+        failwith "Could not compile less in a timely fashion."
 
 Target "CopyStaticContent" (fun () -> 
     !! "src/*.html"
-    ++ "src/*.css"
+    ++ "src/*.less"
     ++ "src/*.js"
     ++ "src/*.vcf"
     ++ "src/images/*.svg"
@@ -37,6 +51,13 @@ Target "CopyStaticContent" (fun () ->
     |> Seq.iter (fun path -> 
         CopyFileWithSubfolder srcDir.FullName siteDir.FullName path
     )
+    
+    compileLess siteDir "home"
+    compileLess siteDir "services"
+    compileLess siteDir "contact"
+    compileLess siteDir "blog"
+    
+    !! "site/*.less" |> Seq.iter DeleteFile
 )
 
 Target "Init" (fun () -> 

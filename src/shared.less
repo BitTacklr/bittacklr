@@ -1,0 +1,187 @@
+@import "colors.less";
+//mixins
+.backgroundcover(@url) {
+    background: url(@url) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.transform(@degrees) {
+    -webkit-transform: rotate(@degrees);
+    -moz-transform: rotate(@degrees);
+    -o-transform: rotate(@degrees);
+    transform: rotate(@degrees);
+}
+.transform-center() {
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.transition(@seconds) {
+    -webkit-transition: @seconds ease-in-out;
+    -moz-transition: @seconds ease-in-out;
+    -o-transition: @seconds ease-in-out;
+    transition: @seconds ease-in-out;
+}
+.transition-opacity(@seconds) {
+    -webkit-transition: opacity @seconds ease-in-out;
+    -moz-transition: opacity @seconds ease-in-out;
+    -o-transition: opacity @seconds ease-in-out;
+    transition: opacity @seconds ease-in-out;
+}
+//shared
+body {
+  margin: 0px;
+  padding: 0px;
+  min-width: 320px;
+  height: 100%;
+}
+@media (max-height: 490px) 
+{
+    #smallbiticon 
+    {
+        display: none;
+    }
+}
+//small
+//-menu
+#largemenubutton
+{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    margin: 0px;
+    padding: 0px;
+}
+#largemenuhamburger
+{
+    display: block;
+    padding: 0px;
+    margin: 0px;
+    width: 72px;
+    height: 54px;
+    cursor: pointer;
+    position: relative;
+}
+#largemenuhamburger li
+{
+    position: absolute;
+    list-style: none;
+    width: 72px;
+    height: 10px;
+    border-radius: 6px;
+    background: whitesmoke;
+    margin-bottom: 8px;
+    opacity: 1;
+    .transform(0deg);
+    .transition(.25s);
+}
+
+#largemenuhamburger.open li
+{
+    background: #cc0000;
+}
+
+#largemenuhamburger li:nth-child(1)
+{
+    top: 0px;
+}
+#largemenuhamburger li:nth-child(2)
+{
+    top: 18px;
+}
+#largemenuhamburger li:nth-child(3)
+{
+    top: 36px;
+}
+
+#largemenuhamburger.open li:nth-child(1)
+{
+    top: 18px;
+    .transform(135deg);
+}
+#largemenuhamburger.open li:nth-child(2)
+{
+    width: 0%;
+    opacity: 0;
+}
+#largemenuhamburger.open li:nth-child(3)
+{
+    top: 18px;
+    .transform(-135deg);
+}
+#largemenu
+{
+    display: block;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin:0px;
+    width:300px;
+    height: 100%;
+    background-color: #000000;
+    box-sizing: border-box;
+    border-left: 1px solid #cc0000;
+    opacity: 0;
+    .transition-opacity(.25s);
+}
+#largemenu ul
+{
+    margin-top: 100px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    padding: 0px;
+}
+#largemenu li
+{
+    list-style: none;
+    text-align: center;
+    background-color: @background-color;
+    padding: 10px;
+    border-bottom: 1px solid @bittacklr-red;
+    box-sizing: border-box;
+}
+#largemenu a
+{
+    display: block;
+    color: @menutext-color;
+    font-family: monospace;
+    font-size: xx-large;
+    text-decoration: none;
+    width: 100%;
+}
+#largemenu a:hover
+{
+    color: @menutext-hover-color;
+}
+#largemenu.open
+{
+    opacity: 1;
+}
+//-icon
+#smallbiticon 
+{
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    margin-left: -22px;
+    margin-bottom: 10px;
+    padding: 0px;
+    height: 45px;
+    width: 45px;
+}
+//large
+//-icon
+#largebiticon 
+{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 0px;
+    padding: 0px;
+    height: 45px;
+    width: 45px;
+}
