@@ -1,5 +1,6 @@
 #I "packages/FAKE/tools"
 #r "FakeLib.dll" // include Fake lib
+#r "packages/AngleSharp/lib/net45/AngleSharp.dll"
 #load "blog.fsx"
 
 open Fake
@@ -7,6 +8,13 @@ open Fake
 open System
 open System.Diagnostics
 open System.IO
+
+open AngleSharp
+open AngleSharp.Dom
+open AngleSharp.Dom.Html
+open AngleSharp.Extensions
+open AngleSharp.Html
+open AngleSharp.Parser.Html
 
 //dev
 // let siteUrl = "http://127.0.0.1:8000/site"
@@ -30,7 +38,12 @@ Target "Clean" (fun () -> DeleteDir siteDir.FullName)
 let private compileLess (workingDir: DirectoryInfo) (stylesheet: string) =
     let result = 
         ExecProcess (fun info ->
-                        info.FileName <- dotless
+                        if isLinux then
+                            info.FileName <- dotless
+                        elif isWindows then
+                            info.FileName <- dotless
+                        else
+                            failwith "Only linux and windows are supported at this moment in time."
                         info.Arguments <- stylesheet
                         info.WorkingDirectory <- workingDir.FullName
                     ) timeToCompileLess
@@ -64,7 +77,31 @@ Target "Init" (fun () ->
     CreateDir siteDir.FullName
 )
 
+let private injectKeywords (workingDirectory: DirectoryInfo) (keywords: string []) =
+    trace "Injecting keywords into each page"
+    let keywordsCsv = String.Join(",", keywords)
+    let parser = HtmlParser()
+    let htmlFiles = workingDirectory.EnumerateFiles("*.html", SearchOption.AllDirectories)
+    htmlFiles
+    |> Seq.iter (fun htmlFile -> 
+        using(htmlFile.OpenRead()) (fun inputStream ->
+            use html = parser.Parse(inputStream)
+            inputStream.Close()
+            match  html.Head.Children |> Seq.tryFind (fun (node: IElement) -> node.LocalName = "meta" && (node.Attributes |> Seq.exists (fun attribute -> attribute.Name = "name" && attribute.Value = "keywords"))) with
+            | Some element -> 
+                element.SetAttribute("content", keywordsCsv)
+                using(htmlFile.OpenWrite()) (fun outputStream ->
+                    using(new StreamWriter(outputStream)) (fun writer ->
+                        html.ToHtml(writer, HtmlMarkupFormatter())
+                        writer.Flush()
+                    )
+                )
+            | None -> ()
+        )
+    )
+
 Target "Build" (fun () -> 
+    //Blog
     let settings : Blog.BlogSettings =
         {
             SiteUrl = siteUrl
@@ -76,6 +113,35 @@ Target "Build" (fun () ->
             TemplatesDir = templatesDir
         }
     Blog.generate settings
+
+    //Keywords
+    let keywords = 
+        [|
+            "bittacklr"
+            "yves reynhout"
+            "consultant"
+            "contractor"
+            "architect"
+            "developer"
+            "software"
+            "analysis"
+            "design"
+            "teach"
+            "coding"
+            "domain driven design"
+            "ddd"
+            "command query responsibility seggregation"
+            "cqrs"
+            "event sourcing"
+            "es"
+            "messaging"
+            "aggregatesource"
+            "projac"
+            "eventstore"
+            "distributed systems"
+            "architecture"
+        |]
+    injectKeywords siteDir keywords
 )
 
 "Clean"

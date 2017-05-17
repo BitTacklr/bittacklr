@@ -169,9 +169,15 @@ let private readBlogPostMetadata (file: FileInfo) =
 
 let private renderBlogPost (template: FileInfo) (input: FileInfo) (output: FileInfo) =
     trace (sprintf "Rendering blogpost %s" input.FullName)
-    //let info = ProcessStartInfo("pandoc", sprintf "--read=markdown_github+yaml_metadata_block --write=html5 --template='%s' --output='%s' '%s'" template.FullName output.FullName input.FullName)
-    let pandocCmd = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Pandoc"), "pandoc.exe")
-    let info = ProcessStartInfo(pandocCmd, sprintf "--read=markdown_github+yaml_metadata_block --write=html5 --standalone --output=\"%s\" \"%s\"" output.FullName input.FullName)
+    let info = 
+        if isLinux then
+            //ProcessStartInfo("pandoc", sprintf "--read=markdown_github+yaml_metadata_block --write=html5 --template='%s' --output='%s' '%s'" template.FullName output.FullName input.FullName)
+            ProcessStartInfo("pandoc", sprintf "--read=markdown_github+yaml_metadata_block --write=html5 --standalone --output='%s' '%s'" output.FullName input.FullName)
+        elif isWindows then
+            let pandocCmd = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Pandoc"), "pandoc.exe")
+            ProcessStartInfo(pandocCmd, sprintf "--read=markdown_github+yaml_metadata_block --write=html5 --standalone --output=\"%s\" \"%s\"" output.FullName input.FullName)
+        else
+            failwith "Only linux and windows are supported at this moment in time."
     info.WindowStyle <- ProcessWindowStyle.Hidden
     use pandoc = Process.Start(info)
     if not(pandoc.WaitForExit(timeToRenderBlogPost)) then 
@@ -210,7 +216,7 @@ let private generateAtomFeed (blogPosts: BlogPost []) (settings: BlogSettings) =
                     let targetFile = blogPost.ResolveTargetFile settings.SiteBlogDir
                     {
                         Id = blogPost.Id
-                        Title = Option.defaultValue (Path.GetFileNameWithoutExtension(blogPost.File.Name)) blogPost.Metadata.Title
+                        Title = defaultArg blogPost.Metadata.Title (Path.GetFileNameWithoutExtension(blogPost.File.Name))
                         RelativeUrl = targetFile.FullName.Substring(settings.SiteBlogDir.FullName.Length + 1)
                         Date = sprintf "%sT00:00:00Z" (blogPost.Date.ToString("yyyy-MM-dd"))
                         Content = SecurityElement.Escape(File.ReadAllText(targetFile.FullName))
@@ -253,14 +259,14 @@ let private generateBlogPage (blogPosts: BlogPost []) (settings: BlogSettings) =
                     let url = post.ResolveTargetUrl settings.BlogBaseUrl
                     let postNode = postTemplateNode.Clone(true) :?> IElement
                     postNode.FirstElementChild.SetAttribute("href", url)
-                    postNode.FirstElementChild.TextContent <- Option.defaultValue "pff" post.Metadata.Title
+                    postNode.FirstElementChild.TextContent <- defaultArg post.Metadata.Title (Path.GetFileNameWithoutExtension(post.File.Name))
                     postTemplateNode.Parent.AppendElement(postNode) |> ignore
                 )
                 postTemplateNode.Remove()
                 yearContentNode :> INode
             )
             |> Seq.toArray
-        smallBitIcon.Before(yearContentNodes)
+        yearContentTemplateNode.After(yearContentNodes)
         yearContentTemplateNode.Remove()
         using(targetFile.OpenWrite()) (fun outputStream ->
             using(new StreamWriter(outputStream)) (fun writer ->
@@ -276,7 +282,7 @@ let generate (settings: BlogSettings) =
 
     let blogPosts =
         allBlogPostFiles
-        |> Array.map (fun (file: FileInfo) -> 
+        |> Array.map (fun file -> 
             { 
                 BaseDirectory = settings.BlogPostsDir
                 File = file

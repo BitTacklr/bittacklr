@@ -182,4 +182,21 @@ function initMaps() {
         map: largeMap,
         icon: 'images/mapmarker.svg'
     });
+
+    // resize map upon window resize
+    google.maps.event.addDomListener(window, "resize", function() {
+        var smallMapElement = document.getElementById('smallmap');
+        if (smallMapElement != undefined && smallMapElement.style.display !== "none") {
+            var smallCenter = smallMap.getCenter();
+            google.maps.event.trigger(smallMap, "resize");
+            smallMap.setCenter(smallCenter);
+        }
+        
+        var largeMapElement = document.getElementById('largemap');
+        if (largeMapElement != undefined && largeMapElement.style.display !== "none") {
+            var largeCenter = largeMap.getCenter();
+            google.maps.event.trigger(largeMap, "resize");
+            largeMap.setCenter(largeCenter);
+        }
+    });
 }
