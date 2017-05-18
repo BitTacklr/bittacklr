@@ -99,6 +99,7 @@ Target "CopyStaticContent" (fun () ->
     compileLess siteDir "services"
     compileLess siteDir "contact"
     compileLess siteDir "blog"
+    compileLess siteDir "policy"
     compileLess siteDir "blogpost"
     
     !! "site/*.less" |> Seq.iter DeleteFile
