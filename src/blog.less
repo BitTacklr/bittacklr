@@ -1,3 +1,5 @@
+@import "colors.less";
+@import "shared.less";
 /* shared */
 body 
 {
@@ -9,12 +11,7 @@ body
 @media (min-width: 720px) 
 {
     html { 
-        background: url(images/largehome.svg) no-repeat center center fixed; 
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -ms-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
+        .backgroundcover("images/largehome.svg");
     }
     #smallcontent 
     {
@@ -28,12 +25,7 @@ body
 @media (max-width: 720px) 
 {
     html { 
-        background-color: url(images/smallhome.svg) no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -ms-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
+        .backgroundcover("images/smallhome.svg");
     }
     #largecontent 
     {
@@ -57,7 +49,7 @@ body
 .smallyearcontent {
     font-family: monospace;
     font-size: xx-large;
-    color: whitesmoke;
+    color: @bittacklr-white;
     width: 100%;
 }
 .smallyearcontent ul {
@@ -70,11 +62,11 @@ body
     text-align: center;
     background-color: #000000;
     padding: 10px;
-    border-bottom: 1px solid #cc0000;
+    border-bottom: 1px solid @bittacklr-red;
     box-sizing: border-box;
 }
 .smallyearcontent a {
-    color: #666666;
+    color: @menutext-color;
     font-family: monospace;
     font-size: x-large;
     text-decoration: none;
@@ -82,7 +74,7 @@ body
     width: 100%;
 }
 .smallyearcontent a:hover {
-    color: #999999;
+    color: @menutext-hover-color;
 }
 .smallyear {
     margin: 0px;

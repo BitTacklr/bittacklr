@@ -1,3 +1,5 @@
+@import "colors.less";
+@import "shared.less";
 /* shared */
 body 
 {
@@ -9,12 +11,7 @@ body
 @media (min-width: 720px) 
 {
     html { 
-        background: url(images/largehome.svg) no-repeat center center fixed; 
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -ms-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
+        .backgroundcover("images/largehome.svg");
     }
     #smallcontent 
     {
@@ -28,12 +25,7 @@ body
 @media (max-width: 720px) 
 {
     html { 
-        background: url(images/smallhome.svg) no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -ms-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
+        .backgroundcover("images/smallhome.svg");
     }
     #largecontent 
     {
@@ -58,10 +50,74 @@ body
     align-items: center;
     justify-content: flex-start;
     height: 100%;
+
+    margin: 10px;
+    color: @menutext-color;
+    font-family: monospace;
+}
+#smallcontent p
+{
+    font-size: x-large;
+    font-style: normal;
+    margin: 0 10px 0 10px;
+    padding: 0 0 10px 10px;
+    border-bottom: 1px solid @bittacklr-red;
+}
+#smallcontent strong
+{
+    color: @bittacklr-red;
+}
+#smallcontent a
+{
+    color: @menutext-color;
+    font-family: monospace;
+}
+#smallcontent a:hover
+{
+    color: @menutext-hover-color;
 }
 /* large */
 #largecontent 
 {
     margin: 0px;
     padding: 0px;
+    height: 100%;
+}
+#largeservicesinfo
+{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    .transform-center();
+    padding: 10px;
+    min-width: 65%;
+    color: @menutext-color;
+    font-family: monospace;
+    
+    border: 1px solid @bittacklr-red;
+}
+#largeservicesinfo p
+{
+    font-size: x-large;
+    font-style: normal;
+    margin: 0 10px 0 10px;
+    padding: 0 0 10px 10px;
+    border-bottom: 1px solid @bittacklr-red;
+}
+#largeservicesinfo p:last-child
+{
+    border-bottom: none;
+}
+#largeservicesinfo strong
+{
+    color: @bittacklr-red;
+}
+#largeservicesinfo a
+{
+    color: @menutext-color;
+    font-family: monospace;
+}
+#largeservicesinfo a:hover
+{
+    color: @menutext-hover-color;
 }
