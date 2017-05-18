@@ -4,7 +4,7 @@ title: "Your VCS - the forgotten feedback loop"
 slug: "your-vcs-the-forgotten-feedback-loop"
 date: 2012-04-19
 author: Yves Reynhout
-publish: true
+publish: false
 ---
 Most agile processes are about (shortening) feedback loops. They come in many shapes and sizes: red/green/refactor, burn down charts, continuous integration, ui mockups, quality assurance ... to name a few. One I recently rediscovered is the power of queries on a version control system.
 

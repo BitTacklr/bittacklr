@@ -4,7 +4,7 @@ title: "Event Enrichment"
 slug: "event-enrichment"
 date: 2013-06-09
 author: Yves Reynhout
-publish: true
+publish: false
 ---
 Event or more generally message enrichment, the act of adding information to a message, comes in many shapes and sizes. Below I scribbled down some of my thoughts on the subject.
 

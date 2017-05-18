@@ -4,7 +4,7 @@ title: "Viewmodels like you meant it"
 slug: "viewmodels-like-you-meant-it"
 date: 2011-12-31
 author: Yves Reynhout
-publish: true
+publish: false
 ---
 Although a lot has been written on the topic of *viewmodels* - both in the MVVM(\*) and MVC UI pattern space - it strikes me as odd how underused they are. Why muck around with resource files and attribute based validation hints inside your views when you could provide them with a rich viewmodel? Most people tend to think about their viewmodels in terms of *input*, either directly (e.g. the value of a textbox) or indirectly (e.g. one of the values you choose from a select, or a list from which to select a row). Why isn't *output* equally as important? Why are those magic strings in the view not part of the viewmodel? Why don't people question the implicit routing and navigation that goes into their views?
 

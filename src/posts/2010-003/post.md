@@ -4,7 +4,7 @@ title: "Secondary indexes and constraints on the write side"
 slug: "consistent-indexes-constraints"
 date: 2010-11-11
 author: Yves Reynhout
-publish: true
+publish: false
 ---
 Anyone who has been following the [ddd/cqrs](groups.google.com/group/dddcqrs) mailing list and has read Greg's article on [Eventual Consistency and Set Validation](http://codebetter.com/blogs/gregyoung/archive/2010/08/12/eventual-consistency-and-set-validation.aspx "Eventual Consistency and Set Validation") will have wondered how to create immediately consistent secondary indexes and enforce uniqueness constraints. Despite the fact that immediate consistency hurts scalability, I don't see any harm in discussing on how to achieve it. After all, you might be highly collaborative, but not need to scale to that level. ![Command Process Flow](storage-e1289428696595.png) Let's step back for a moment. What are we trying to achieve with a secondary index? Suppose in my command handler I want to be able to query on something else than the aggregate's unique identifier (an alternate identifier, a set of aggregates that are contained by a parent aggregate, etc...). That's what the secondary index store is for - you don't have a regular queryable schema when using an event store. What are we trying to achieve with a constraint? Well, the most obvious case is the uniqueness of a certain trait of an aggregate within a set of aggregates (the classical case being the uniqueness of a login name of a user account). So, now that we have the "what"/"why" out of the way let's see about the "how".
 

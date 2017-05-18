@@ -4,7 +4,7 @@ title: "EventBuilders - Revisited"
 slug: "eventbuilders-revisited"
 date: 2013-05-30
 author: Yves Reynhout
-publish: true
+publish: false
 ---
 ### Introduction
 

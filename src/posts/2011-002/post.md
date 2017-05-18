@@ -4,7 +4,7 @@ title: "Command Design Survey"
 slug: "command-design-survey"
 date: 2011-02-28
 author: Yves Reynhout
-publish: true
+publish: false
 ---
 A while back, I did a command design survey to get a feeling as to how people were designing their commands in a CQRS environment. A total of 28 people participated in the survey (excluding myself, as I didn't want to bias the results in any way). I want to thank each one of you for taking the time to do so. Here are the results: [<img src="http://seabites.files.wordpress.com/2011/02/cmdsurvery_initializeq.png" title="How do you initialize your command properties?" class="aligncenter size-full wp-image-142" width="402" height="280" />](cmdsurvery_behaviorq.png) To the question "What else is special about your commands?" I got this compiled list:
 

@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>BitTacklr - Blog</title>
+    <title>BitTacklr - Blog - Copyright 2017</title>
     <meta charset="UTF-8" />
-    <meta name=viewport content="width=device-width, height=device-height, initial-scale=1">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
     <meta name="author" content="Yves Reynhout" />
     <meta name="keywords" content="bittacklr,yves reynhout,consultant,contractor,architect,developer,software,analysis,design,teach,coding,domain driven design,ddd,command query responsibility seggregation,cqrs,event sourcing,es,messaging,aggregatesource,projac,eventstore,distributed systems,architecture" />
     <meta name="description" content="The BitTacklr Blog" />
     <link rel="shortcut icon" href="images/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="blog.css" />
+    <script type="text/javascript" src="menu.js"></script>
     <link rel="alternate" type="application/atom+xml" title="The BitTacklr Blog" href="bittacklr-atom.xml" />
     <!-- Google Analytics -->
     <script type="text/javascript">
@@ -36,7 +37,35 @@
             </nav>
         </div>
     </div>
-    <div id="largecontent"></div>
+    <div id="largecontent">
+        <div id="largecontentbox">
+            <div id="largelist">
+                <div class="largeyearcontent">
+                    <div class="largeyear"><span data-id="year"></span></div>
+                    <nav>
+                        <ul>
+                            <li data-id="post"><a href=""></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div id="largebiticon"><img src="images/bittacklr-icon.svg" alt="Copyright 2017 - BitTacklr BVBA" title="Copyright 2017 - BitTacklr BVBA"></div>
+        <div id="largemenu">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+        <div id="largemenubutton">
+            <ul id="largemenuhamburger" onclick="toggleMenu();">
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
 </body>
 
 </html>

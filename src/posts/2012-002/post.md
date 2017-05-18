@@ -4,7 +4,7 @@ title: "Using Windows Azure to build a simple EventStore"
 slug: "using-windows-azure-to-build-a-simple-eventstore"
 date: 2012-02-16
 author: Yves Reynhout
-publish: true
+publish: false
 ---
 Continuing my journey, I figured it shouldn't be that hard to apply [“Your EventStream is a linked list”](http://seabites.wordpress.com/2011/12/07/your-eventstream-is-a-linked-list/ "Your EventStream is a linked list") using [Windows Azure Storage Services](http://www.windowsazure.com "Windows Azure").
 

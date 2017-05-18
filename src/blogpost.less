@@ -1,0 +1,39 @@
+@import "colors.less";
+@import "shared.less";
+/* shared */
+@media (min-width: 720px) 
+{
+    html { 
+        .backgroundcover("images/smallhome.svg");
+    }
+    #smallcontent 
+    {
+        display: none;
+    }
+    #largecontent 
+    {
+        display: block;
+    }
+}
+@media (max-width: 720px) 
+{
+    html { 
+        .backgroundcover("images/smallhome.svg");
+    }
+    #largecontent 
+    {
+        display: none;
+    }
+    #smallcontent
+    {
+        display: flex;
+    }
+}
+body
+{
+    color: @menutext-color;
+    font-family: monospace;
+    margin: 10px;
+}
+/* small */
+/* large */

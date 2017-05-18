@@ -5,7 +5,7 @@ slug: "a-message-for-mr-aggregate"
 date: 2010-11-01
 author: Yves Reynhout
 tags: [ddd]
-publish: true
+publish: false
 ---
 When creating new aggregates, one usually has an aggregate that plays a "factory" like role. It's the ideal spot to copy any data the created aggregate might require later on in its life cycle. 
 

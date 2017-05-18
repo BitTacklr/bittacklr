@@ -4,7 +4,7 @@ title: "Trench Talk: Visual DSLs - the need for communication"
 slug: "trenchtalk-visualdsls"
 date: 2014-02-16
 author: Yves Reynhout
-publish: true
+publish: false
 ---
 As I'm slowly unwinding from a 5 year period of working on "something" in the area of electronic scheduling, I figured I'd share some of the experiences in modeling.
 

@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>$pagetitle$</title>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name=viewport content="width=device-width, height=device-height, initial-scale=1">
+    <title>BitTacklr - Blog - $if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
 $for(author-meta)$
-    <meta name="author" content="$author-meta$" />
+    <meta name="author" content="$author-meta$">
 $endfor$
 $if(keywords)$
-    <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
+    <meta name="keywords" content="bittacklr,yves reynhout,consultant,contractor,architect,developer,software,analysis,design,teach,coding,domain driven design,ddd,command query responsibility seggregation,cqrs,event sourcing,es,messaging,aggregatesource,projac,eventstore,distributed systems,architecture,$for(keywords)$$keywords$$sep$, $endfor$">
 $endif$
-    <link rel="shortcut icon" href="images/favicon.ico" />
-    <link rel="stylesheet" type="text/css" href="blog.css" />
+    <meta name="description" content="This is a post in the BitTacklr blog" />
+    <link rel="shortcut icon" href="../../../../images/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../../../../blogpost.css" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+    <meta name="generator" content="pandoc">
     <style type="text/css">code{white-space: pre;}</style>
 $if(quotes)$
     <style type="text/css">q { quotes: "“" "”" "‘" "’"; }</style>
@@ -22,35 +25,40 @@ $if(highlighting-css)$
 $highlighting-css$
     </style>
 $endif$
-$for(css)$
-    <link rel="stylesheet" href="$css$" type="text/css" />
-$endfor$
-$if(math)$
-    $math$
-$endif$
 $for(header-includes)$
-    $header-includes$
+  $header-includes$
 $endfor$
-    <meta name="description" content="The BitTacklr blog" />
-    <!-- Google Analytics -->
-    <script type="text/javascript">
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'UA-45897245-1', 'auto');
-ga('send', {
-  hitType: 'pageview',
-  title: 'blog',
-  page: location.pathname
-});
-    </script>
-    <script async type="text/javascript" src='https://www.google-analytics.com/analytics.js'></script>
-    <!-- End Google Analytics -->
 </head>
+
 <body>
-    <div id="smallcontent">
+$for(include-before)$
+$include-before$
+$endfor$
+$if(title)$
+    <header>
+        <h1 class="title">$title$</h1>
+$if(subtitle)$
+        <p class="subtitle">$subtitle$</p>
+$endif$
+$for(author)$
+        <p class="author">$author$</p>
+$endfor$
+$if(date)$
+        <p class="date">$date$</p>
+$endif$
+    </header>
+$endif$
+$if(toc)$
+    <nav id="$idprefix$TOC">
+$toc$
+    </nav>
+$endif$
 $body$
-    </div>
-    <div id="largecontent">
-$body$
-    </div>
+$for(include-after)$
+$include-after$
+$endfor$
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
 </body>
+
 </html>

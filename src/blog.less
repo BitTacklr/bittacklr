@@ -88,4 +88,59 @@ body
 {
     margin: 0px;
     padding: 0px;
+    height: 100%;
+}
+#largecontentbox
+{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    .transform-center();
+    margin: 0px;
+    padding: 0px;
+    min-width: 50%;
+    max-height: 50%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    color: @menutext-color;
+    font-family: monospace;
+    
+    border: 1px solid @bittacklr-red;
+}
+.largeyearcontent {
+    font-family: monospace;
+    font-size: xx-large;
+    color: @bittacklr-white;
+    width: 100%;
+}
+.largeyearcontent ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+.largeyearcontent li {
+    list-style: none;
+    text-align: center;
+    background-color: #000000;
+    padding: 10px;
+    border-bottom: 1px solid @bittacklr-red;
+    box-sizing: border-box;
+}
+.largeyearcontent a {
+    color: @menutext-color;
+    font-family: monospace;
+    font-size: x-large;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+}
+.largeyearcontent a:hover {
+    color: @menutext-hover-color;
+}
+.largeyear {
+    margin: 0px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #555555;
 }

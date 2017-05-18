@@ -4,7 +4,7 @@ title: "The Money Box"
 slug: "the-money-box"
 date: 2012-08-29
 author: Yves Reynhout
-publish: true
+publish: false
 ---
 Once in a while I hear/read people struggle with [projection](http://cqrsguide.com/doc:projection "Projection") performance. The root causes of their performance issues are diverse:
 

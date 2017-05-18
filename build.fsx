@@ -24,12 +24,13 @@ let siteUrl = "http://bittacklr.be"
 
 let siteDir = DirectoryInfo(Path.Combine(__SOURCE_DIRECTORY__, "site"))
 let siteBlogDir = DirectoryInfo(Path.Combine(siteDir.FullName, "blog"))
+let siteImagesDir = (DirectoryInfo(Path.Combine(siteDir.FullName, "images")))
 let srcDir = DirectoryInfo(Path.Combine(__SOURCE_DIRECTORY__, "src"))
 let templatesDir = DirectoryInfo(Path.Combine(srcDir.FullName, "templates"))
 let blogPostsDir = DirectoryInfo(Path.Combine(srcDir.FullName, "posts"))
 
 /// Settings
-let private timeToCompileLess = TimeSpan.FromSeconds(5.0)
+let private timeToComplete = TimeSpan.FromSeconds(5.0)
 let private dotless = Path.Combine(Path.Combine(Path.Combine(Path.Combine(__SOURCE_DIRECTORY__, "packages"), "dotless"), "tool"), "dotless.compiler.exe")
 
 Target "Clean" (fun () -> DeleteDir siteDir.FullName)
@@ -43,11 +44,41 @@ let private compileLess (workingDir: DirectoryInfo) (stylesheet: string) =
                             info.FileName <- dotless
                         else
                             failwith "Only linux and windows are supported at this moment in time."
-                        info.Arguments <- stylesheet
+                        info.Arguments <- sprintf "-m %s" stylesheet
                         info.WorkingDirectory <- workingDir.FullName
-                    ) timeToCompileLess
+                    ) timeToComplete
     if result <> 0 then
         failwith "Could not compile less in a timely fashion."
+
+let private minifySvg (workingDir: DirectoryInfo) =
+    let result = 
+        ExecProcess (fun info ->
+                        if isLinux then
+                            info.FileName <- "svgo"
+                        elif isWindows then
+                            info.FileName <- dotless
+                        else
+                            failwith "Only linux and windows are supported at this moment in time."
+                        info.Arguments <- sprintf "-f %s" workingDir.FullName
+                        info.WorkingDirectory <- workingDir.FullName
+                    ) timeToComplete
+    if result <> 0 then
+        failwith "Could not minify SVG images in a timely fashion."
+
+let private minifyHtml (workingDir: DirectoryInfo) =
+    let result = 
+        ExecProcess (fun info ->
+                        if isLinux then
+                            info.FileName <- "html-minifier"
+                        elif isWindows then
+                            info.FileName <- dotless
+                        else
+                            failwith "Only linux and windows are supported at this moment in time."
+                        info.Arguments <- sprintf "--html5 --minify-js true --collapse-whitespace --file-ext html --input-dir '%s' --output-dir '%s'" workingDir.FullName workingDir.FullName
+                        info.WorkingDirectory <- workingDir.FullName
+                    ) timeToComplete
+    if result <> 0 then
+        failwith "Could not minify HTML documents in a timely fashion."
 
 Target "CopyStaticContent" (fun () -> 
     !! "src/*.html"
@@ -68,15 +99,12 @@ Target "CopyStaticContent" (fun () ->
     compileLess siteDir "services"
     compileLess siteDir "contact"
     compileLess siteDir "blog"
+    compileLess siteDir "blogpost"
     
     !! "site/*.less" |> Seq.iter DeleteFile
 )
 
-Target "Init" (fun () -> 
-    CreateDir siteDir.FullName
-)
-
-Target "Build" (fun () -> 
+Target "CopyBlogContent" (fun () ->
     //Blog
     let settings : Blog.BlogSettings =
         {
@@ -91,9 +119,19 @@ Target "Build" (fun () ->
     Blog.generate settings
 )
 
+Target "Init" (fun () -> 
+    CreateDir siteDir.FullName
+)
+
+Target "Build" (fun () -> 
+    minifySvg siteImagesDir
+    minifyHtml siteDir
+)
+
 "Clean"
 ==> "Init"
 ==> "CopyStaticContent"
+==> "CopyBlogContent"
 ==> "Build"
 
 RunTargetOrDefault "Build"

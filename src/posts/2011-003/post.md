@@ -4,7 +4,7 @@ title: "How do you control time?"
 slug: "how-do-you-control-time"
 date: 2011-07-24
 author: Yves Reynhout
-publish: true
+publish: false
 ---
 Granted, in some systems this might not be an issue. But if you want to be able to test your system's behavior in a deterministic fashion, it becomes important to be able to control time. So how do you control time in your code? Simple, you define your own Clock and use it instead of the System.DateTime static members. 
 

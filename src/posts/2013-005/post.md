@@ -4,7 +4,7 @@ title: "Trench Talk: Assert.That(We.Understand());"
 slug: "trenchtalk-assertthatweunderstand"
 date: 2013-11-26
 author: Yves Reynhout
-publish: true
+publish: false
 ---
 After having written 2000+ eventsourcing-meets-aggregates specific *given-when-then* test specifications(\*), you can imagine I started to notice both "problems" and "patterns". Here's a small overview ...
 

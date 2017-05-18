@@ -4,7 +4,7 @@ title: "Value objects in an event sourced domain model"
 slug: "value-objects-in-an-eventsourced-domain-model"
 date: 2012-06-18
 author: Yves Reynhout
-publish: true
+publish: false
 ---
 A question that comes up from time to time is what role [value objects](http://domaindrivendesign.org/node/135 "Value Objects") can play in an [event sourced](http://martinfowler.com/eaaDev/EventSourcing.html "Event sourcing")[domain model](http://domaindrivendesign.org/node/108 "domain layer") and how they contribute to and interact with the [events](http://en.wikipedia.org/wiki/Event "Event") produced by said domain model. Value objects come in many shapes and sizes, but obvious ones like money (amount and currency) and period (range of time values) come to mind. Fields that change together or are used together in the [ubiquitous language](http://domaindrivendesign.org/node/132 "Ubiquitous language") are prime suspects of information "clustering" and can usually be represented as value objects when they clearly lack any form of identity. They are an ideal place to [DRY](http://en.wikipedia.org/wiki/Don't_repeat_yourself "Don't repeat yourself") up some of the *validation*, *security* and *contextual capturing* code that surrounds these fields. Below you'll find a stripped version of a [value object](http://c2.com/cgi/wiki?ValueObject "Value object") from my own domain. Things you can't easily spot from the code below is the clusivity of the lower and upper boundary of this range-like value type, partially because I omitted the arithmetic operations. The finer details, such as which methods are required and who to collaborate with, surface as you discuss them with domain experts. 
 

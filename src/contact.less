@@ -176,13 +176,11 @@
     .transform-center();
     margin: 0px;
     padding: 0px;
-    min-width: 65%;
+    min-width: 50%;
     color: @menutext-color;
     font-family: monospace;
     
-    border-left: 1px solid @bittacklr-red;
-    border-right: 1px solid @bittacklr-red;
-    border-top: 1px solid @bittacklr-red;
+    border: 1px solid @bittacklr-red;
 }
 #largeinfocard h1
 {
@@ -229,6 +227,10 @@
     padding-bottom: 15px;
     border-bottom: 1px solid @bittacklr-red;
     box-sizing: border-box;
+}
+#largeinfocard li:last-child
+{
+    border-bottom: none;
 }
 #largeinfovcard
 {

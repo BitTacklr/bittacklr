@@ -171,11 +171,10 @@ let private renderBlogPost (template: FileInfo) (input: FileInfo) (output: FileI
     trace (sprintf "Rendering blogpost %s" input.FullName)
     let info = 
         if isLinux then
-            //ProcessStartInfo("pandoc", sprintf "--read=markdown_github+yaml_metadata_block --write=html5 --template='%s' --output='%s' '%s'" template.FullName output.FullName input.FullName)
-            ProcessStartInfo("pandoc", sprintf "--read=markdown_github+yaml_metadata_block --write=html5 --standalone --output='%s' '%s'" output.FullName input.FullName)
+            ProcessStartInfo("pandoc", sprintf "--read=markdown_github+yaml_metadata_block --write=html5 --standalone --template='%s' --output='%s' '%s'" template.FullName output.FullName input.FullName)
         elif isWindows then
             let pandocCmd = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Pandoc"), "pandoc.exe")
-            ProcessStartInfo(pandocCmd, sprintf "--read=markdown_github+yaml_metadata_block --write=html5 --standalone --output=\"%s\" \"%s\"" output.FullName input.FullName)
+            ProcessStartInfo(pandocCmd, sprintf "--read=markdown_github+yaml_metadata_block --write=html5 --standalone --template=\"%s\" --output=\"%s\" \"%s\"" template.FullName output.FullName input.FullName)
         else
             failwith "Only linux and windows are supported at this moment in time."
     info.WindowStyle <- ProcessWindowStyle.Hidden
@@ -204,7 +203,11 @@ let private generateBlogPosts (blogPosts: BlogPost []) (blogPostTemplate: FileIn
 
 let private generateAtomFeed (blogPosts: BlogPost []) (settings: BlogSettings) =
     trace "Generating atom feed"
-    let latest = blogPosts |> Array.map (fun blogPost -> blogPost.Date) |> Array.max
+    let latest = 
+        if blogPosts.Length <> 0 then
+            blogPosts |> Array.map (fun blogPost -> blogPost.Date) |> Array.max
+        else
+            DateTime.Now.Date
     let feed = 
         { 
             SiteUrl = settings.SiteUrl
@@ -225,6 +228,37 @@ let private generateAtomFeed (blogPosts: BlogPost []) (settings: BlogSettings) =
         }
     Atomfeed.generate feed settings.SiteDir
 
+let private generateBlogList (template: IElement) (blogPosts: BlogPost []) (settings: BlogSettings) =
+    blogPosts
+    |> Seq.sortByDescending (fun blogPost -> blogPost.Date)
+    |> Seq.groupBy (fun blogPost -> blogPost.Date.Year)
+    |> Seq.map (fun (year, posts) -> 
+        let yearContentNode = template.Clone(true) :?> IElement
+        let yearNode = 
+            yearContentNode.Descendents().OfType<IElement>()
+            |> Seq.find (fun (node: IElement) -> 
+                node.Attributes |> Seq.exists (fun attribute -> attribute.Name = "data-id" && attribute.Value = "year")
+            )
+        yearNode.TextContent <- year.ToString()
+        let postTemplateNode = 
+            yearContentNode.
+                Descendents().
+                OfType<IElement>()
+                |> Seq.find (fun (node: IElement) -> 
+                    node.Attributes |> Seq.exists (fun attribute -> attribute.Name = "data-id" && attribute.Value = "post")
+                )
+        posts
+        |> Seq.iter (fun post ->
+            let url = post.ResolveTargetUrl settings.BlogBaseUrl
+            let postNode = postTemplateNode.Clone(true) :?> IElement
+            postNode.FirstElementChild.SetAttribute("href", url)
+            postNode.FirstElementChild.TextContent <- defaultArg post.Metadata.Title (Path.GetFileNameWithoutExtension(post.File.Name))
+            postTemplateNode.Parent.AppendElement(postNode) |> ignore
+        )
+        postTemplateNode.Remove()
+        yearContentNode :> INode
+    )
+    |> Seq.toArray
 let private generateBlogPage (blogPosts: BlogPost []) (settings: BlogSettings) =
     trace "Generating blog page"
     let targetFile = FileInfo(Path.Combine(settings.SiteDir.FullName, "blog.html"))
@@ -232,42 +266,19 @@ let private generateBlogPage (blogPosts: BlogPost []) (settings: BlogSettings) =
     let parser = HtmlParser()
     using(blogFile.OpenRead()) (fun inputStream ->
         use html = parser.Parse(inputStream)
+
         let smallContent = html.GetElementById("smallcontent")
-        let yearContentTemplateNode = smallContent.FirstElementChild
-        let smallBitIcon = smallContent.LastElementChild
-        let yearContentNodes =
-            blogPosts
-            |> Seq.sortByDescending (fun blogPost -> blogPost.Date)
-            |> Seq.groupBy (fun blogPost -> blogPost.Date.Year)
-            |> Seq.map (fun (year, posts) -> 
-                let yearContentNode = yearContentTemplateNode.Clone(true) :?> IElement
-                let yearNode = 
-                    yearContentNode.Descendents().OfType<IElement>()
-                    |> Seq.find (fun (node: IElement) -> 
-                        node.Attributes |> Seq.exists (fun attribute -> attribute.Name = "data-id" && attribute.Value = "year")
-                    )
-                yearNode.TextContent <- year.ToString()
-                let postTemplateNode = 
-                    yearContentNode.
-                        Descendents().
-                        OfType<IElement>()
-                        |> Seq.find (fun (node: IElement) -> 
-                            node.Attributes |> Seq.exists (fun attribute -> attribute.Name = "data-id" && attribute.Value = "post")
-                        )
-                posts
-                |> Seq.iter (fun post ->
-                    let url = post.ResolveTargetUrl settings.BlogBaseUrl
-                    let postNode = postTemplateNode.Clone(true) :?> IElement
-                    postNode.FirstElementChild.SetAttribute("href", url)
-                    postNode.FirstElementChild.TextContent <- defaultArg post.Metadata.Title (Path.GetFileNameWithoutExtension(post.File.Name))
-                    postTemplateNode.Parent.AppendElement(postNode) |> ignore
-                )
-                postTemplateNode.Remove()
-                yearContentNode :> INode
-            )
-            |> Seq.toArray
-        yearContentTemplateNode.After(yearContentNodes)
-        yearContentTemplateNode.Remove()
+        let smallYearContentTemplateNode = smallContent.FirstElementChild
+        let smallYearContentNodes = generateBlogList smallYearContentTemplateNode blogPosts settings
+        smallYearContentTemplateNode.After(smallYearContentNodes)
+        smallYearContentTemplateNode.Remove()
+
+        let largeList = html.GetElementById("largelist")
+        let largeYearContentTemplateNode = largeList.FirstElementChild
+        let largeYearContentNodes = generateBlogList largeYearContentTemplateNode blogPosts settings
+        largeYearContentTemplateNode.After(largeYearContentNodes)
+        largeYearContentTemplateNode.Remove()
+
         using(targetFile.OpenWrite()) (fun outputStream ->
             using(new StreamWriter(outputStream)) (fun writer ->
                 html.ToHtml(writer, PrettyMarkupFormatter())

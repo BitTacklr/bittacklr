@@ -4,7 +4,7 @@ title: "Object Inheritance"
 slug: "object-inheritance"
 date: 2012-10-12
 author: Yves Reynhout
-publish: true
+publish: false
 ---
 When mentioning "object inheritance" most people immediately think of "[class inheritance](http://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming) "Class inheritance")". Alas, that's not what it is. Quoting from [Streamlined Object Modeling](http://www.amazon.com/Streamlined-Object-Modeling-Patterns-Implementation/dp/0130668397 "Streamlined object modeling")\*:
 

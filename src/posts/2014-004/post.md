@@ -4,7 +4,7 @@ title: "Reply to \"DDD, CQRS & ES: Lessons Learned\""
 slug: "reply-to-ddd-cqrs-es-lessons-learned"
 date: 2014-11-10
 author: Yves Reynhout
-publish: true
+publish: false
 ---
 Last Monday I attended a meetup of the Belgian Domain Driven Design group. One of the [presentations](http://www.slideshare.net/Qframe/ddd-cqrs-es-lessons-learned "The slide deck") was titled *DDD, CQRS & ES: Lessons Learned*, which - what did you expect? - caught my interest. [Gitte](https://twitter.com/GitteTitter "Gitte's twitter"), the presenter, explained the problems she and her team came across while applying the aforementioned set of acronyms. None of these stumbling blocks came as a surprise to me. It's the same kind of issues that almost everyone faces when they first set out on this journey. The solutions are often trivial and diverse, but sometimes they're not and may require a bit of explanation. I didn't get a chance to discuss some of the alternatives with Gitte directly. You know how it goes, you end up talking to a lot of people but not everyone, and perhaps, in retrospect, it's better to let things sink in, instead of blurting out what can only come across as condescending "I know better" type of remarks, which, honestly, is not my intent. So without further ado, let's go over some of those problems:
 

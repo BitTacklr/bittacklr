@@ -4,7 +4,7 @@ title: "Your UI is a statechart"
 slug: "your-ui-is-a-statechart"
 date: 2011-12-08
 author: Yves Reynhout
-publish: true
+publish: false
 ---
 Let that sink in for a minute ... Raise your hand if you start out by designing a behavioral - not to be confused with a navigational - model of your UI before transforming those nice mock-ups into code. Yeah, I figured as much ;-). Why on earth would you want to turn user interface development into a software design technique? For the same reason all those XP engineering practices are so appealing: So that it can be changed repeatedly throughout the lifetime of the system. I think most of us know how fast UI code can become  'spaghetti'-shaped, despite our best effort to adhere to patterns like [MVC](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller "Model View Controller"), [MVP](http://en.wikipedia.org/wiki/Model_View_Presenter "Model View Presenter"), [MVVM](http://en.wikipedia.org/wiki/MVVM "Model View ViewModel") et alii. We all aspire to have a UI that can be quickly and easily written, is easy to test using white box techniques, can be modified without introducing side-effects, and can be regression tested without manual labor. Yet, if we're honest, that's rarely what we end up with. I for one am a strong believer that using statechart notation for all but trivial User Interfaces is a must to get us there. It offers insight you can hardly get from looking at either a mockup or controller code.
 

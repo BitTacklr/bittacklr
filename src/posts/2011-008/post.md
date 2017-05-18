@@ -4,7 +4,7 @@ title: "Your EventStream is a linked list"
 slug: "your-eventstream-is-a-linked-list"
 date: 2011-12-07
 author: Yves Reynhout
-publish: true
+publish: false
 ---
 A week ago I had an interesting twonversation with [Jérémie Chassaing](http://thinkbeforecoding.com/ "Jérémie Chassaing") and [Rinat Abdullin](http://abdullin.com/ "Rinat Abdullin") about [event streams](http://abdullin.com/journal/2011/12/3/thoughts-on-event-streams-in-elastic-environments.html "event streams ala Rinat"). I mentioned how I had been toying with eventstreams as being linked lists of changesets (to the aficionados of [Jonathan Oliver's](http://blog.jonathanoliver.com "Jonathan Oliver's blog")[EventStore](https://github.com/joliver/EventStore "The EventStore Project @ GitHub"), this is very much akin to what he calls [Commits](http://blog.jonathanoliver.com/2010/12/cqrs-eventstore-v2-architectural-overview/ "Commits explained")) in the past. As a way of documenting some of my thoughts on the subject I'm putting up some schematics here. \[caption id="attachment\_304" align="aligncenter" width="329" caption="Model"\]![EventStream - Model](changesetlinkedlist.png)\[/caption\] Each changeset knows its "parent", i.e. the changeset that it should be appended to. Except for the very first changeset, which obviously does not have a "parent" (strictly speaking you could have an explicit terminator "parent"). Chronologically, changeset 1 came before changeset 2, changeset 2 came before changeset 3, and so on. Looking at the write side of a system that uses event streams for storage, there are two main scenarios:
 

@@ -4,7 +4,7 @@ title: "Using Amazon Web Services to build a simple Event Store"
 slug: "using-amazon-web-services-to-build-a-simple-event-store"
 date: 2012-02-11
 author: Yves Reynhout
-publish: true
+publish: false
 ---
 My post on "[Your EventStream is a linked list](http://seabites.wordpress.com/2011/12/07/your-eventstream-is-a-linked-list/ "Your EventStream is a linked list")" might have been somewhat abstract (a more prosaic version can be found [here](http://stackoverflow.com/questions/9083972/is-it-possible-to-make-conditional-inserts-with-azure-table-storage/9085397#9085397 "Prosaic version of Your EventStream is a linked list")). By way of *testing* my *theory*, I set out to apply it using Amazon's Web Services (AWS) stack. I used AWS DynamoDB as the transactional medium that would handle the optimistic concurrency, and AWS S3 to store the changesets.
 

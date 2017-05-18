@@ -4,7 +4,7 @@ title: "EventBuilders"
 slug: "eventbuilders"
 date: 2011-07-27
 author: Yves Reynhout
-publish: true
+publish: false
 ---
 Some people have asked me to clarify what I've been saying over on [twitter](http://twitter.com/yreynhout "Yves Reynhout") about using event builders. This post is an attempt at showing how I've been using them.
 

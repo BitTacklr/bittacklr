@@ -4,7 +4,7 @@ title: "A role to play"
 slug: "a-role-to-play"
 date: 2013-02-24
 author: Yves Reynhout
-publish: true
+publish: false
 ---
 Every so often someone new arrives at the DDD/CQRS list (\*) and topics such as set based validation rear their head, resulting in near-endless threads of discussion and coming to a common understanding. A topic that isn't as often discussed is one of roles in the domain model and how that would work in combination with event sourcing. If you want to read up on roles, Mark Seemann has [some great posts on that topic](http://blog.ploeh.dk/2013/01/07/RoleHints.aspx "About roles") on his blog, albeit in a slightly different context. There's also this [video](http://www.infoq.com/presentations/Making-Roles-Explicit-Udi-Dahan "Making roles explicit video") by [Udi Dahan](http://www.udidahan.com/ "The software simplist") about making roles explicit, which is more akin to what I'll be touching upon here. Fanatics of whitepapers, might get their brain washed by papers like "[Role Interfaces](http://martinfowler.com/bliki/RoleInterface.html "Role interfaces")", "[The Role Object Pattern](http://hillside.net/plop/plop97/Proceedings/riehle.pdf "The Role Object Pattern")", "[Modeling Roles](http://objectdiscovery.com/solutions/publications/roles/index.html "Modeling Roles")" or "[Mock Roles, not Objects](http://jmock.org/oopsla2004.pdf "Mock Roles, not Objects")".
 

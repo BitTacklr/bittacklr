@@ -4,7 +4,7 @@ title: "Message contract DSL"
 slug: "message-contract-dsl"
 date: 2011-08-17
 author: Yves Reynhout
-publish: true
+publish: false
 ---
 A long time ago, I read this [post](http://abdullin.com/journal/2010/10/12/teach-visual-studio-your-own-language-easy.html) by [Rinat Abdullin](http://abdullin.com/) on teaching Microsoft Visual Studio your own language. Unfortunately, at the time I was struggling with more basic CQRS concepts and so it got somewhat pushed to the background. Today, however, after authoring the gazillionth command and event by hand, I knew something had to change. This was just too tedious, manual labor. Granted, it only takes 5 to 10 minutes at first to define a command or event. But as you progress, you start refactoring towards composable types, creating builders for those types, and before you know it, you spent 45 minutes on datastructures. Not my idea of productivity. As I reread Rinat's article, I knew I had reached that point where automation needs to kick in (it just took me a little longer). I wasn't particularly keen on using ANTLR and an AST to define my grammar, so I started looking for alternatives. The usual suspects passed by: xml (too verbose), json (better, but still too verbose), yaml (dismissed because of lack of familiarity - your mileage may vary). I continued hacking in notepad until I hit something that looked pretty much like the example below. \[sourcecode language="text"\] \[MakeDogBarkCommand\] DogId=Guid Times=Int32 \[DogBarkedEvent\] Id=Guid Version=In64 NameOfDog=String (Called) Times=Int32 (ForNumberOfTimes) 
 ```
