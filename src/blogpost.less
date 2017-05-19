@@ -1,11 +1,12 @@
 @import "colors.less";
 @import "shared.less";
 /* shared */
+html
+{ 
+    background-color: @background-color;
+}
 @media (min-width: 720px) 
 {
-    html { 
-        .backgroundcover("images/smallhome.svg");
-    }
     #smallcontent 
     {
         display: none;
@@ -17,9 +18,6 @@
 }
 @media (max-width: 720px) 
 {
-    html { 
-        .backgroundcover("images/smallhome.svg");
-    }
     #largecontent 
     {
         display: none;
@@ -31,9 +29,126 @@
 }
 body
 {
-    color: @menutext-color;
+    margin-top: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+header h1.title
+{
+    margin: 0px;
+    padding: 0px;
+    font-size: xx-large;
+    border-bottom: 1px solid @bittacklr-red;
+}
+header p.subtitle
+{
+    margin: 0px;
+    padding: 0px;
+    font-size: x-large;
+}
+header span.pipe
+{
+    color: @bittacklr-red;
+}
+header div.dateandauthor
+{
+    margin: 10px 0 0 0;
+    padding: 0px;
+    font-size: small;
+}
+//small
+#smallcontent
+{
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 100%;
+
+    color: @blogtext-color;
     font-family: monospace;
+    
+    margin: auto;
+    max-width: 60rem;
+    line-height: 1.5rem;
+    word-wrap: break-word;
+    box-sizing: border-box;
     margin: 10px;
 }
-/* small */
-/* large */
+#smallcontent h2
+{
+    border-bottom: 1px solid @blogheaderborder-color;
+}
+#smallcontent p
+{
+    margin: 10px 0 10px 0;
+    font-size: 1rem;
+    font-style: normal;
+}
+#smallcontent a
+{
+    cursor: pointer;
+    color: @bittacklr-red;
+    text-decoration: none;
+    border-bottom: 1px solid @bittacklr-red;
+}
+#smallcontent a:hover 
+{
+    background-color: @bittacklr-red;
+    color: @bittacklr-white;
+}
+#smallcontent blockquote
+{
+    padding-left: 2ch;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px dashed @bittacklr-red;
+}
+//large
+#largecontent
+{
+    padding: 0px;
+    height: 100%;
+}
+#largeblogpostbox
+{
+    padding: 0px;
+    height: 100%;
+
+    color: @blogtext-color;
+    font-family: monospace;
+
+    margin: auto;
+    max-width: 60rem;
+    line-height: 1.5rem;
+    word-wrap: break-word;
+    box-sizing: border-box;
+}
+#largeblogpostbox h2
+{
+    border-bottom: 1px solid @blogheaderborder-color;
+}
+#largeblogpostbox p
+{
+    margin: 10px 0 10px 0;
+    font-size: 1rem;
+    font-style: normal;
+}
+#largeblogpostbox a
+{
+    cursor: pointer;
+    color: @bittacklr-red;
+    text-decoration: none;
+    border-bottom: 1px solid @bittacklr-red;
+}
+#largeblogpostbox a:hover 
+{
+    background-color: @bittacklr-red;
+    color: @bittacklr-white;
+}
+#largeblogpostbox blockquote
+{
+    padding-left: 2ch;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px dashed @bittacklr-red;
+}

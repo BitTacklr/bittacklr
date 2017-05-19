@@ -20,6 +20,7 @@ $endif$
     <script src="https://cdn.ravenjs.com/3.15.0/raven.min.js"></script>
     <script type="text/javascript">Raven.config('https://6b25c5db43eb40b7828bd0e2ab6efd68@sentry.io/169712').install();</script>
     <!-- End Sentry.IO -->
+    <script type="text/javascript" src="../../../../menu.js"></script>
     <!-- Google Analytics -->
     <script type="text/javascript">
         window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
@@ -47,6 +48,7 @@ $endfor$
 </head>
 
 <body>
+    <div id="smallcontent">
 $for(include-before)$
 $include-before$
 $endfor$
@@ -56,12 +58,7 @@ $if(title)$
 $if(subtitle)$
         <p class="subtitle">$subtitle$</p>
 $endif$
-$for(author)$
-        <p class="author">$author$</p>
-$endfor$
-$if(date)$
-        <p class="date">$date$</p>
-$endif$
+        <div class="dateandauthor"><span class="date">$date$</span><span class="pipe">&nbsp;|&nbsp;</span><span class="author">$author$</span></div>
     </header>
 $endif$
 $if(toc)$
@@ -73,8 +70,53 @@ $body$
 $for(include-after)$
 $include-after$
 $endfor$
+    </div>
+    <div id="largecontent">
+    <div id="largeblogpostbox">
+$for(include-before)$
+$include-before$
+$endfor$
+$if(title)$
+    <header>
+        <h1 class="title">$title$</h1>
+$if(subtitle)$
+        <p class="subtitle">$subtitle$</p>
+$endif$
+        <div class="dateandauthor"><span class="date">$date$</span><span class="pipe">&nbsp;|&nbsp;</span><span class="author">$author$</span></div>
+    </header>
+$endif$
+$if(toc)$
+    <nav id="$idprefix$TOC">
+$toc$
+    </nav>
+$endif$
+$body$
+$for(include-after)$
+$include-after$
+$endfor$
+    </div>
+    <div id="largebiticon"><img src="../../../../images/bittacklr-icon.svg" alt="Copyright 2017 - BitTacklr BVBA" title="Copyright 2017 - BitTacklr BVBA"></div>
+    <div id="largemenu">
+        <ul>
+            <li><a href="../../../../home.html">Home</a></li>
+            <li><a href="../../../../services.html">Services</a></li>
+            <li><a href="../../../../contact.html">Contact</a></li>
+            <li><a href="../../../../blog.html">Blog</a></li>
+            <li><a href="../../../../policy.html">Policy</a></li>
+        </ul>
+    </div>
+    <div id="largemenubutton">
+        <ul id="largemenuhamburger" onclick="toggleMenu();">
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    </div>
+    <!-- Highlist.js -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
     <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+    <!-- End Highlist.js -->
 </body>
 
 </html>
