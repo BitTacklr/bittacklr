@@ -47,7 +47,7 @@ body
 #smallcontent 
 {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     height: 100%;
 
@@ -55,12 +55,32 @@ body
     color: @menutext-color;
     font-family: monospace;
 }
-#smallcontent p
+#smallcontent h1
+{
+    font-size: xx-large;
+    margin: 0 0 10px 0;
+    padding: 0px;
+}
+#smallcontent h2
 {
     font-size: x-large;
+    margin: 10px 0 10px 0;
+    padding: 0px;
+}
+#smallcontent h3
+{
+    font-size: larger;
+    margin: 10px 0 10px 0;
+    padding: 0px;
+    border-bottom: 1px solid @bittacklr-red;
+}
+#smallcontent p
+{
+    font-size: large;
     font-style: normal;
-    margin: 0 10px 0 10px;
-    padding: 0 0 10px 10px;
+    display: block;
+    margin: 0px;
+    padding: 0 0 10px 0;
     border-bottom: 1px solid @bittacklr-red;
 }
 #smallcontent strong
@@ -85,26 +105,42 @@ body
 }
 #largeservicesbox
 {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    .transform-center();
-    padding: 10px;
-    min-width: 50%;
-    max-height: 90%;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    padding: 0px;
+    height: 100%;
     color: @menutext-color;
     font-family: monospace;
     
-    border: 1px solid @bittacklr-red;
+    margin-left: auto;
+    margin-right:auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-width: 50rem;
+}
+#largeservicesbox h1
+{
+    font-size: xx-large;
+    margin: 10px 0 10px 0;
+    padding: 0px;
+}
+#largeservicesbox h2
+{
+    font-size: x-large;
+    margin: 10px 0 10px 0;
+    padding: 0px;
+}
+#largeservicesbox h3
+{
+    font-size: larger;
+    margin: 10px 0 10px 0;
+    padding: 0px;
+    border-bottom: 1px solid @bittacklr-red;
 }
 #largeservicesbox p
 {
-    font-size: x-large;
+    font-size: large;
     font-style: normal;
-    margin: 0 10px 0 10px;
-    padding: 0 0 10px 10px;
+    margin: 0px;
+    padding: 0 0 10px 0;
     border-bottom: 1px solid @bittacklr-red;
 }
 #largeservicesbox p:last-child

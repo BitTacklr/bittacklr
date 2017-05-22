@@ -54,12 +54,13 @@ let private minifySvg (workingDir: DirectoryInfo) =
     let result = 
         ExecProcess (fun info ->
                         if isLinux then
-                            info.FileName <- "svgo"
+                            info.FileName <- "node"
+                            info.Arguments <- sprintf "../../node_modules/svgo/bin/svgo -f %s" workingDir.FullName
                         elif isWindows then
-                            info.FileName <- dotless
+                            info.FileName <- "node.exe"
+                            info.Arguments <- sprintf "..\\..\\node_modules\\svgo\\bin\\svgo -f %s" workingDir.FullName
                         else
                             failwith "Only linux and windows are supported at this moment in time."
-                        info.Arguments <- sprintf "-f %s" workingDir.FullName
                         info.WorkingDirectory <- workingDir.FullName
                     ) timeToComplete
     if result <> 0 then
@@ -69,12 +70,13 @@ let private minifyHtml (workingDir: DirectoryInfo) =
     let result = 
         ExecProcess (fun info ->
                         if isLinux then
-                            info.FileName <- "html-minifier"
+                            info.FileName <- "node"
+                            info.Arguments <- sprintf "../node_modules/html-minifier/src/htmlminifier.js --html5 --minify-js true --collapse-whitespace --file-ext html --input-dir '%s' --output-dir '%s'" workingDir.FullName workingDir.FullName
                         elif isWindows then
-                            info.FileName <- dotless
+                            info.FileName <- "node.exe"
+                            info.Arguments <- sprintf "..\\node_modules\\html-minifier\\src\\htmlminifier.js --html5 --minify-js true --collapse-whitespace --file-ext html --input-dir '%s' --output-dir '%s'" workingDir.FullName workingDir.FullName
                         else
                             failwith "Only linux and windows are supported at this moment in time."
-                        info.Arguments <- sprintf "--html5 --minify-js true --collapse-whitespace --file-ext html --input-dir '%s' --output-dir '%s'" workingDir.FullName workingDir.FullName
                         info.WorkingDirectory <- workingDir.FullName
                     ) timeToComplete
     if result <> 0 then
@@ -101,6 +103,7 @@ Target "CopyStaticContent" (fun () ->
     compileLess siteDir "blog"
     compileLess siteDir "policy"
     compileLess siteDir "blogpost"
+    compileLess siteDir "highlight"
     
     !! "site/*.less" |> Seq.iter DeleteFile
 )

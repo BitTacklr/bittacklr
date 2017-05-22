@@ -1,0 +1,23 @@
+{
+  "name": "bittacklr",
+  "version": "1.0.0",
+  "description": "The BitTacklr website",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BitTacklr/bittacklr.git"
+  },
+  "keywords": [
+    "bittacklr",
+    "website"
+  ],
+  "author": "Yves Reynhout",
+  "license": "None",
+  "bugs": {
+    "url": "https://github.com/BitTacklr/bittacklr/issues"
+  },
+  "homepage": "https://github.com/BitTacklr/bittacklr",
+  "devDependencies": {
+    "svgo": "0.7.2",
+    "html-minifier": "3.5.1"
+  }
+}

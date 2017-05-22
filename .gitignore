@@ -2,3 +2,4 @@ packages
 site
 .fake
 wp.xml
+node_modules
