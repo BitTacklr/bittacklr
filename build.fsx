@@ -22,6 +22,7 @@ open AngleSharp.Parser.Html
 //production
 let siteUrl = "http://bittacklr.be"
 
+let thisDir = DirectoryInfo(__SOURCE_DIRECTORY__)
 let siteDir = DirectoryInfo(Path.Combine(__SOURCE_DIRECTORY__, "site"))
 let siteBlogDir = DirectoryInfo(Path.Combine(siteDir.FullName, "blog"))
 let siteImagesDir = (DirectoryInfo(Path.Combine(siteDir.FullName, "images")))
@@ -50,14 +51,17 @@ let private compileLess (workingDir: DirectoryInfo) (stylesheet: string) =
     if result <> 0 then
         failwith "Could not compile less in a timely fashion."
 
-let private minifySvg (workingDir: DirectoryInfo) =
+let private minifySvg (configDir: DirectoryInfo) (workingDir: DirectoryInfo) =
     let result = 
         ExecProcess (fun info ->
                         if isLinux then
                             info.FileName <- "node"
+                            //info.Arguments <- sprintf "../../node_modules/svgo/bin/svgo --enable=removeAttrs --config=%s -f %s" (Path.Combine(configDir.FullName, "svgo.yml")) workingDir.FullName
                             info.Arguments <- sprintf "../../node_modules/svgo/bin/svgo -f %s" workingDir.FullName
+                            //removeAttrs svg:height svg:width svg:viewBox
                         elif isWindows then
                             info.FileName <- "node.exe"
+                            //info.Arguments <- sprintf "..\\..\\node_modules\\svgo\\bin\\svgo --enable=removeAttrs --config=%s -f %s" (Path.Combine(configDir.FullName, "svgo.yml"))  workingDir.FullName
                             info.Arguments <- sprintf "..\\..\\node_modules\\svgo\\bin\\svgo -f %s" workingDir.FullName
                         else
                             failwith "Only linux and windows are supported at this moment in time."
@@ -88,6 +92,7 @@ Target "CopyStaticContent" (fun () ->
     ++ "src/*.js"
     ++ "src/*.vcf"
     ++ "src/images/*.svg"
+    ++ "src/images/*.png"
     ++ "src/fonts/*.eot"
     ++ "src/fonts/*.svg"
     ++ "src/fonts/*.ttf"
@@ -104,6 +109,7 @@ Target "CopyStaticContent" (fun () ->
     compileLess siteDir "policy"
     compileLess siteDir "blogpost"
     compileLess siteDir "highlight"
+    compileLess siteDir "browsernotsupported"
     
     !! "site/*.less" |> Seq.iter DeleteFile
 )
@@ -128,7 +134,7 @@ Target "Init" (fun () ->
 )
 
 Target "Build" (fun () -> 
-    minifySvg siteImagesDir
+    minifySvg thisDir siteImagesDir
     minifyHtml siteDir
 )
 
