@@ -10,10 +10,12 @@ Now, obviously, the same object can very well have multiple names or identifiers
 
 > A true identifier reliably leads the user to one and only object and must always lead to the same object whenever it is used.
 
-That effectively makes an identifier immutable in space and time, inherently prohibiting reuse. Anybody familiar with event sourcing or event driven approaches should recognize the similarity with events. The similarity with a [URN](https://tools.ietf.org/html/rfc8141) is striking. It's not that difficult to find practical examples of identifiers and identification schemes that are in use in a given domain. Given the importance of messaging in today's world, having a firm grasp of how object identification works is not a luxury, in my opinion.
+That effectively makes an identifier immutable in space and time, inherently prohibiting reuse. Anybody familiar with event sourcing or event driven approaches will enjoy the immutability aspect. The similarity with e.g. a [URN](https://tools.ietf.org/html/rfc8141) is striking. It's not that difficult to find practical examples of identifiers and identification schemes that are in use in a given domain. Given the importance of messaging in today's world, having a firm grasp of how object identification works is not a luxury, in my opinion.
 
-Complications
--------------
+It's complicated
+----------------
+
+I didn't just ramp up to this point to merely talk about how you map identifiers to objects. In today's distributed services world, whether yours is of the micro, service orientation, event driven or physically separately deployed bounded context kind, distributing object identifiers is a given.
 
 
 
