@@ -103,6 +103,7 @@ Target "CopyStaticContent" (fun () ->
     )
     
     compileLess siteDir "home"
+    compileLess siteDir "training"
     compileLess siteDir "services"
     compileLess siteDir "contact"
     compileLess siteDir "blog"

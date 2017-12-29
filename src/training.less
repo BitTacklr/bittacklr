@@ -1,0 +1,186 @@
+@import "colors.less";
+@import "shared.less";
+/* shared */
+body 
+{
+    margin: 0px;
+    padding: 0px;
+    min-width: 320px;
+    height: 100%;
+}
+@media (min-width: 720px) 
+{
+    html { 
+        .backgroundcover("images/largehome.svg");
+    }
+    #smallcontent 
+    {
+        display: none;
+    }
+    #largecontent 
+    {
+        display: block;
+    }
+}
+@media (max-width: 720px) 
+{
+    html { 
+        .backgroundcover("images/smallhome.svg");
+    }
+    #largecontent 
+    {
+        display: none;
+    }
+    #smallcontent
+    {
+        display: flex;
+    }
+}
+@media (max-height: 380px) 
+{
+    #smallbiticon 
+    {
+        display: none;
+    }
+}
+/* small */
+#smallcontent 
+{
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 100%;
+
+    margin: 10px;
+    color: @menutext-color;
+    font-family: monospace;
+}
+#smallcontent h1
+{
+    font-size: xx-large;
+    margin: 0 0 10px 0;
+    padding: 0px;
+}
+#smallcontent h2
+{
+    font-size: x-large;
+    margin: 10px 0 10px 0;
+    padding: 0px;
+}
+#smallcontent h3
+{
+    font-size: larger;
+    margin: 10px 0 10px 0;
+    padding: 0px;
+    border-bottom: 1px solid @bittacklr-red;
+}
+#smallcontent p
+{
+    font-size: large;
+    font-style: normal;
+    display: block;
+    margin: 0px;
+    padding: 0 0 10px 0;
+}
+#smallcontent p.underline
+{
+    border-bottom: 1px solid @bittacklr-red;
+}
+#smallcontent strong
+{
+    color: @bittacklr-red;
+}
+#smallcontent a
+{
+    font-size: large;
+    font-style: normal;
+    cursor: pointer;
+    color: @bittacklr-red;
+    text-decoration: none;
+    border-bottom: 1px solid @bittacklr-red;
+}
+#smallcontent a:hover
+{
+    font-size: large;
+    font-style: normal;
+    background-color: @bittacklr-red;
+    color: @bittacklr-white;
+}
+#smallcontent ul
+{
+    font-size: large;
+}
+/* large */
+#largecontent 
+{
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+#largetrainingbox
+{
+    padding: 0px;
+    height: 100%;
+    color: @menutext-color;
+    font-family: monospace;
+    
+    margin-left: auto;
+    margin-right:auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-width: 50rem;
+}
+#largetrainingbox h1
+{
+    font-size: xx-large;
+    margin: 10px 0 10px 0;
+    padding: 0px;
+}
+#largetrainingbox h2
+{
+    font-size: x-large;
+    margin: 10px 0 10px 0;
+    padding: 0px;
+}
+#largetrainingbox h3
+{
+    font-size: larger;
+    margin: 10px 0 10px 0;
+    padding: 0px;
+    border-bottom: 1px solid @bittacklr-red;
+}
+#largetrainingbox p
+{
+    font-size: large;
+    font-style: normal;
+    margin: 0px;
+    padding: 0 0 10px 0;
+}
+#largetrainingbox p.underline
+{
+    border-bottom: 1px solid @bittacklr-red;
+}
+#largetrainingbox strong
+{
+    color: @bittacklr-red;
+}
+#largetrainingbox a
+{
+    font-size: large;
+    font-style: normal;
+    cursor: pointer;
+    color: @bittacklr-red;
+    text-decoration: none;
+    border-bottom: 1px solid @bittacklr-red;
+}
+#largetrainingbox a:hover 
+{
+    font-size: large;
+    font-style: normal;
+    background-color: @bittacklr-red;
+    color: @bittacklr-white;
+}
+#largetrainingbox ul
+{
+    font-size: large;
+}
