@@ -1,5 +1,8 @@
-packages
-site
 .fake
-wp.xml
+.paket/paket.exe
+.paket/Paket.Restore.targets
 node_modules
+packages
+paket-files
+site
+wp.xml
