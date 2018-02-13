@@ -20,7 +20,7 @@ open AngleSharp.Parser.Html
 // //dev online
 // let siteUrl = "http://bittacklr.bitballoon.com"
 //production
-let siteUrl = "http://bittacklr.be"
+let siteUrl = "https://bittacklr.be"
 
 let thisDir = DirectoryInfo(__SOURCE_DIRECTORY__)
 let siteDir = DirectoryInfo(Path.Combine(__SOURCE_DIRECTORY__, "site"))
@@ -86,6 +86,25 @@ let private minifyHtml (workingDir: DirectoryInfo) =
     if result <> 0 then
         failwith "Could not minify HTML documents in a timely fashion."
 
+let private minifyJsFile (workingFile: FileInfo) =
+    let result = 
+        ExecProcess (fun info ->
+                        if isLinux then
+                            info.FileName <- "node"
+                            info.Arguments <- sprintf "../node_modules/uglify-js/bin/uglifyjs '%s' --compress --output '%s'" workingFile.FullName workingFile.FullName
+                        elif isWindows then
+                            info.FileName <- "node.exe"
+                            info.Arguments <- sprintf "..\\node_modules\\uglify-js\\bin\\uglifyjs '%s' --compress --output '%s'" workingFile.FullName workingFile.FullName
+                        else
+                            failwith "Only linux and windows are supported at this moment in time."
+                    ) timeToComplete
+    if result <> 0 then
+        failwith "Could not minify JS document in a timely fashion."
+
+let private minifyJs (workingDir: DirectoryInfo) =
+    workingDir.EnumerateFiles("*.js", SearchOption.AllDirectories)
+    |> Seq.iter minifyJsFile
+
 Target "CopyStaticContent" (fun () -> 
     !! "src/*.html"
     ++ "src/*.less"
@@ -137,6 +156,7 @@ Target "Init" (fun () ->
 Target "Build" (fun () -> 
     minifySvg thisDir siteImagesDir
     minifyHtml siteDir
+    minifyJs siteDir
 )
 
 "Clean"

@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/BitTacklr/bittacklr",
   "devDependencies": {
+    "html-minifier": "3.5.1",
     "svgo": "0.7.2",
-    "html-minifier": "3.5.1"
+    "uglify-js": "3.3.10"
   }
 }
