@@ -57,7 +57,7 @@ let private minifySvg (configDir: DirectoryInfo) (workingDir: DirectoryInfo) =
                         if isLinux then
                             info.FileName <- "node"
                             //info.Arguments <- sprintf "../../node_modules/svgo/bin/svgo --enable=removeAttrs --config=%s -f %s" (Path.Combine(configDir.FullName, "svgo.yml")) workingDir.FullName
-                            info.Arguments <- sprintf "../../node_modules/svgo/bin/svgo -f %s" workingDir.FullName
+                            info.Arguments <- sprintf "../../node_modules/.bin/svgo -f %s" workingDir.FullName
                             //removeAttrs svg:height svg:width svg:viewBox
                         elif isWindows then
                             info.FileName <- "node.exe"
@@ -75,7 +75,7 @@ let private minifyHtml (workingDir: DirectoryInfo) =
         ExecProcess (fun info ->
                         if isLinux then
                             info.FileName <- "node"
-                            info.Arguments <- sprintf "../node_modules/html-minifier/src/htmlminifier.js --html5 --minify-js true --collapse-whitespace --file-ext html --input-dir '%s' --output-dir '%s'" workingDir.FullName workingDir.FullName
+                            info.Arguments <- sprintf "../node_modules/.bin/html-minifier --html5 --minify-js true --collapse-whitespace --file-ext html --input-dir '%s' --output-dir '%s'" workingDir.FullName workingDir.FullName
                         elif isWindows then
                             info.FileName <- "node.exe"
                             info.Arguments <- sprintf "..\\node_modules\\html-minifier\\src\\htmlminifier.js --html5 --minify-js true --collapse-whitespace --file-ext html --input-dir '%s' --output-dir '%s'" workingDir.FullName workingDir.FullName
@@ -91,7 +91,7 @@ let private minifyJsFile (workingFile: FileInfo) =
         ExecProcess (fun info ->
                         if isLinux then
                             info.FileName <- "node"
-                            info.Arguments <- sprintf "../node_modules/uglify-js/bin/uglifyjs '%s' --compress --output '%s'" workingFile.FullName workingFile.FullName
+                            info.Arguments <- sprintf "./node_modules/.bin/uglifyjs '%s' --compress --output '%s'" workingFile.FullName workingFile.FullName
                         elif isWindows then
                             info.FileName <- "node.exe"
                             info.Arguments <- sprintf "..\\node_modules\\uglify-js\\bin\\uglifyjs '%s' --compress --output '%s'" workingFile.FullName workingFile.FullName
